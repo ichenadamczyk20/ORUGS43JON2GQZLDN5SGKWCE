@@ -10,4 +10,6 @@ Alex Cho is now `owo`
 
 `:3` (15:02 May 19): made WORKLOG.md, PRESENTATION.md, HOMEWORK.md, and subdirectories
 
-`owo` (15:05 May 19): change README so it doesn't lie and worked on slides
+`owo` (15:05 May 19): changed README so it doesn't lie and worked on slides
+
+'owo' (15:30 May 19): updated PRESENTATION.md with material from google slides >:( why can't we just use google slides smh
