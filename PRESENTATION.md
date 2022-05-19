@@ -7,6 +7,6 @@ Audio Steganography acts in a similar fashion to image steganography - storing d
 
 #### Example:
 
-![](present_img/creeper.webp)
+![](present_img/creeper.webp) { width: 200px; }
 
 Above was an example of a hidden image of a creeper within the sound files for cave14.ogg, a music file within minecraft.
