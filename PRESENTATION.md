@@ -23,3 +23,11 @@ Files that are:
   - Under file types: WAV, mp3, aiff, ogg, webm, m4a, flac, etc.
   - Usually at least 1KB, but under 10 MB
 tend to contain audio.
+
+### Useful codec software
+- for interfacing with mp4 (the hardest): ffmpeg, LAME
+- for converting between files: you can use vlc as a command line tool
+ `vlc -I dummy "example.wav" --sout=#transcode{acodec=mp3,vcodec=dummy}:standard{access=file,mux=raw,dst="example.mp3"}`
+- for playing audio files in the terminal: aplay, mpg123, or ffplay
+- for downloading from youtube: youtube-dl
+- for editing audio, or ripping the audio from a video: audacity
