@@ -17,3 +17,9 @@ Audio Steganography has some advantages over Image Steganography. For example, i
 
 For a more legal example, Amazon modified its Super Bowl commercial for Alexa to have a code hidden in the advertisement to tell Alexa to not trigger when called on by the ad.
 
+## What Files Store Audio?
+
+Files that are:
+  - Under file types: WAV, mp3, aiff, ogg, webm, m4a, flac, etc.
+  - Usually at least 1KB, but under 10 MB
+tend to contain audio.
