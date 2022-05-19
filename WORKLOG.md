@@ -12,4 +12,4 @@ Alex Cho is now `owo`
 
 `owo` (15:05 May 19): changed README so it doesn't lie and worked on slides
 
-'owo' (15:30 May 19): updated PRESENTATION.md with material from google slides >:( why can't we just use google slides smh
+`owo` (15:30 May 19): updated PRESENTATION.md with material from google slides >:( why can't we just use google slides smh
