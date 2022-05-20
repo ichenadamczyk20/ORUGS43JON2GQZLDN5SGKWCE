@@ -17,3 +17,7 @@ Alex Cho is now `owo`
 `:3` (15:35 May 19): Added a slide outlining useful codec software
 
 `:3` (15:13 May 20): Added a slide explaining the RIFF format
+
+`owo` (15:35 May 20): Wrote code to read and write to arbitrary file
+
+`:3` (15:35 May 20): Added some pseudocode and half code to do the stega
