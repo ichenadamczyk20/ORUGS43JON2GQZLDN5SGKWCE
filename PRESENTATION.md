@@ -44,4 +44,5 @@ A RIFF chunk looks like this:
  - Size of the data: 64 bits, 8 bytes, 'tis the number of bytes in the data
  - Form type: 4 bytes, 4 letters (can be CPPO, PAL, RDIB, RMID, RMMP, WAVE)
  - The actual data
+
 The data is made of RIFF subchunks that follow the exact same format as above, but without the "form type" field.
