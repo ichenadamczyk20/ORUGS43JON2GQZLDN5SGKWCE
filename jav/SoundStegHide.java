@@ -25,7 +25,7 @@ public class SoundStegHide {
 
     public static void main(String[] args){
         try{
-            System.out.println("Usage: java -jar SoundStegHide.class <original audio> <output audio> <file to hide>");
+            System.out.println("Usage: java SoundStegHide <original audio> <output audio> <file to hide>");
 
             String soundFile = args[0];
             String outputSound = args[1];
