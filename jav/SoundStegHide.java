@@ -41,6 +41,7 @@ public class SoundStegHide {
             byte[] inp = converter(inputFile);
 
             int currentPowerOfTwo = 7; // goes from 7 to 0
+            byte quBit = 0B10000000 - 128;
             int currentIndex = 0;
             boolean continuing = true;
 
@@ -52,21 +53,22 @@ public class SoundStegHide {
 
             for (int i = 44; i < wav.length; i++) {
                 byte tmp = wav[i];
-                if ((tmp & 0B00000111) == 0) {
+                if ((tmp & (0B00000111 - 128)) == (0B00000000 - 128)) {
                     if (continuing) {
-                        int bit = inp[currentIndex] & ((byte) (int) Math.pow(2, currentPowerOfTwo));
-                        if (bit != 0) {
-                            tmp |= 0B00000001;
-                        } else {
-                            tmp &= 0B11111110;
+                        byte bit = (byte) (inp[currentIndex] & quBit);
+                        tmp |= (0B00000001 - 128);
+                        if (bit == (byte) (0B00000000 - 128)) {
+                            System.out.println("FALSE");
+                            tmp &= (0B11111110 - 128);
                         }
                         currentPowerOfTwo --;
+                        quBit = (byte) (quBit >> 1);
                         if (currentPowerOfTwo < 0) {
                             currentPowerOfTwo = 7;
+                            quBit = 0B10000000 - 128;
                             currentIndex += 1;
-                            if (currentIndex > inp.length) {
+                            if (currentIndex >= inp.length) {
                                 continuing = false;
-                                break;
                             }
                         }
                     }
