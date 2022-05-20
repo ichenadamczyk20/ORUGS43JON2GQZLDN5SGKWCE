@@ -21,3 +21,5 @@ Alex Cho is now `owo`
 `owo` (15:35 May 20): Wrote code to read and write to arbitrary file
 
 `:3` (15:35 May 20): Added some pseudocode and half code to do the stega
+
+`owo` and `:3` (18:45 May 20): Met up on repl.it and zoom and implemented a steganography program for .wav files
