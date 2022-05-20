@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class SoundStegSolve{
+public class SoundStegSolve {
   public static byte[] converter (String filename){
     try{
       File file = new File(filename);
@@ -24,38 +24,47 @@ public class SoundStegSolve{
   }
 
   public static void main(String[] args){
-    String soundFile = args[0];
-    String outputSound = args[1];
-    String inputFile = args[2];
+    try{
+      System.out.println("Usage: java SoundStegSolve <original audio> <modified audio> <file to reveal>");
+
+      String soundFile = args[0];
+      String soundFileNew = args[1];
+      String outputFile = args[2];
 
 
-    File file = new File(outputSound);
-    FileInputStream out = new FileInputStream(file);
-    // byte[] data = new byte[(int)file.length()];
-    // out.write(data);
+      File file = new File(outputFile);
+      FileOutputStream out = new FileOutputStream(file);
 
-    byte[] wav = converter(soundFile);
-    byte[] inp = converter(inputFile);
+      byte[] wav = converter(soundFile);
+      byte[] wav2 = converter(soundFileNew);
 
-    int currentPowerOfTwo = 7; // goes from 7 to 0
-    int currentIndex = 0;
+      int currentPowerOfTwo = 7; // goes from 7 to 0
+      int currentIndex = 0;
+      byte currentByte = 0B00000000;
+      boolean continuing = true;
 
-    byte[] tmp = new byte[44];
-    for(int i = 0; i < tmp.length; i++){
-      tmp[i] = wav[i]
-    }
-    out.write(tmp);
-
-    for (int i = 44; i < wav.length; i++) {
-      byte[] tmp = new byte[1];
-      if (wav[i] & 7 == 0) {
-
+      for (int i = 44; i < wav.length; i++) {
+        if ((wav[i] != wav2[i]) && (wav2[i] & 0B00000110) == 0) {
+          currentByte |= ((byte) (int) Math.pow(2, currentPowerOfTwo));
+          currentPowerOfTwo --;
+          if (currentPowerOfTwo < 0) {
+            currentPowerOfTwo = 7;
+            currentIndex += 1;
+            out.write(currentByte);
+          }
+        }
       }
 
-      out.write(tmp);
-    }
+      System.out.println("file written now go read it");
 
-    out.close();
+      out.close();
+    }catch(FileNotFoundException e){
+      System.out.println("ERROR: File not found");
+      e.printStackTrace();
+    }catch(IOException e){
+      System.out.println("IO Exception");
+      e.printStackTrace();
+    }
   }
 
 }
