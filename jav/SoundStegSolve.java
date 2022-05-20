@@ -40,17 +40,23 @@ public class SoundStegSolve {
 
       int currentPowerOfTwo = 7; // goes from 7 to 0
       int currentIndex = 0;
-      byte currentByte = 0B00000000;
+      byte currentByte = 0B00000000 - 128;
       boolean continuing = true;
 
       for (int i = 44; i < wav.length; i++) {
-        if ((wav[i] != wav2[i]) && (wav2[i] & 0B00000110) == 0) {
-          currentByte |= ((byte) (int) Math.pow(2, currentPowerOfTwo));
-          currentPowerOfTwo --;
+        if (wav[i] != wav2[i]) {
+          if ((wav2[i] & (0B00000001 - 128)) == 0B00000001 - 128) {
+            currentByte |= (0B00000001 - 128);
+          } else {
+            System.out.println("FALSE");
+          }
+          currentPowerOfTwo = currentPowerOfTwo - 1;
+          currentByte = (byte) (currentByte << 1);
           if (currentPowerOfTwo < 0) {
+            out.write(currentByte);
             currentPowerOfTwo = 7;
             currentIndex += 1;
-            out.write(currentByte);
+            currentByte = 0B00000000 - 128;
           }
         }
       }
