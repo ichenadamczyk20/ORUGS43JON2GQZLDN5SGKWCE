@@ -66,10 +66,9 @@ public class SoundStegHide {
                             currentIndex += 1;
                             if (currentIndex > inp.length) {
                                 continuing = false;
+                                break;
                             }
                         }
-                    } else {
-                        tmp != 0B00000010;
                     }
                 }
 
