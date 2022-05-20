@@ -24,10 +24,38 @@ public class SoundStegSolve{
   }
 
   public static void main(String[] args){
-    byte[] x = converter("giveup.wav");
-    for(int i = 0; i < x.length; i++){
-      System.out.print(x[i] + " ");
+    String soundFile = args[0];
+    String outputSound = args[1];
+    String inputFile = args[2];
+
+
+    File file = new File(outputSound);
+    FileInputStream out = new FileInputStream(file);
+    // byte[] data = new byte[(int)file.length()];
+    // out.write(data);
+
+    byte[] wav = converter(soundFile);
+    byte[] inp = converter(inputFile);
+
+    int currentPowerOfTwo = 7; // goes from 7 to 0
+    int currentIndex = 0;
+
+    byte[] tmp = new byte[44];
+    for(int i = 0; i < tmp.length; i++){
+      tmp[i] = wav[i]
     }
+    out.write(tmp);
+
+    for (int i = 44; i < wav.length; i++) {
+      byte[] tmp = new byte[1];
+      if (wav[i] & 7 == 0) {
+
+      }
+
+      out.write(tmp);
+    }
+
+    out.close();
   }
 
 }
