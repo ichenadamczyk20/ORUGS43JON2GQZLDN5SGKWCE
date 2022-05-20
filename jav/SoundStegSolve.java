@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import java.io.*;
 import java.util.*;
 
@@ -31,3 +32,10 @@ public class SoundStegSolve{
   }
 
 }
+=======
+// read wav file
+
+// if the first 4 bytes of the sound are 1000, then we make the last byte the data and the second-last byte 0
+
+// at end of data , make the second-last byte 1 always
+>>>>>>> caeaa6de18f3c5b2c5130dd4e97b704a6e3a8aa8

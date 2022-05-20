@@ -1,10 +1,48 @@
 # Audio Steganography!
 ### Alex Cho, Ian Chen
 
-What is Audio Steganography?
+## What is Audio Steganography?
 
 Audio Steganography acts in a similar fashion to image steganography - storing data through slightly modifying an audio file to hide data in a way that is undetectable by the human ear. This could be done in a multitude of different types of files, from hiding data in the header of a WAV file to creating images that become visible through applications such as Audacity.
 
-Example:
+#### Example:
 
 ![](present_img/creeper.webp)
+
+Above was an example of a hidden image of a creeper within the sound files for cave14.ogg, a music file within minecraft.
+
+## Some Uses of Audio Steganography
+
+Audio Steganography has some advantages over Image Steganography. For example, it can be used to spy on a household more stealthily - an Indian advertisement company called SilverPush was able to transmit data from their websites or advertisements on TVs to phones to track users’ habits. By taking advantage of audio files, the company obtained information it would not have been able to without cameras. 
+
+For a more legal example, Amazon modified its Super Bowl commercial for Alexa to have a code hidden in the advertisement to tell Alexa to not trigger when called on by the ad.
+
+## What Files Store Audio?
+
+Files that are:
+  - Under file types: WAV, mp3, aiff, ogg, webm, m4a, flac, etc.
+  - Usually at least 1KB, but under 10 MB
+tend to contain audio.
+
+### Useful codec software
+- for interfacing with mp4 (the hardest): ffmpeg, LAME
+- for converting between files: you can use vlc as a command line tool
+ `vlc -I dummy "example.wav" --sout=#transcode{acodec=mp3,vcodec=dummy}:standard{access=file,mux=raw,dst="example.mp3"}`
+- for playing audio files in the terminal: aplay, mpg123, or ffplay
+- for downloading from youtube: youtube-dl
+- for editing audio, or ripping the audio from a video: audacity
+
+### What is a .wav file?
+A Waveform Audio File Format, a.k.a. WAV file, is a file format created by Microsoft and IBM to store audio bitstreams on PCs.
+
+WAV files make use of the Resource Interchange File Format, RIFF, bitstream for storing data in chunks.
+
+### What is a RIFF file?
+###### source: https://johnloomis.org/cpe102/asgn/asgn1/riff.html
+A RIFF chunk looks like this:
+ - Chunk identifier: 64 bits, 8 bytes
+ - Size of the data: 64 bits, 8 bytes, 'tis the number of bytes in the data
+ - Form type: 4 bytes, 4 letters (can be CPPO, PAL, RDIB, RMID, RMMP, WAVE)
+ - The actual data
+
+The data is made of RIFF subchunks that follow the exact same format as above, but without the "form type" field.
