@@ -15,3 +15,5 @@ Alex Cho is now `owo`
 `owo` (15:30 May 19): updated PRESENTATION.md with material from google slides >:( why can't we just use google slides smh
 
 `:3` (15:35 May 19): Added a slide outlining useful codec software
+
+`:3` (15:13 May 20): Added a slide explaining the RIFF format
