@@ -31,3 +31,17 @@ tend to contain audio.
 - for playing audio files in the terminal: aplay, mpg123, or ffplay
 - for downloading from youtube: youtube-dl
 - for editing audio, or ripping the audio from a video: audacity
+
+### What is a .wav file?
+A Waveform Audio File Format, a.k.a. WAV file, is a file format created by Microsoft and IBM to store audio bitstreams on PCs.
+
+WAV files make use of the Resource Interchange File Format, RIFF, bitstream for storing data in chunks.
+
+### What is a RIFF file?
+###### source: https://johnloomis.org/cpe102/asgn/asgn1/riff.html
+A RIFF chunk looks like this:
+ - Chunk identifier: 64 bits, 8 bytes
+ - Size of the data: 64 bits, 8 bytes, 'tis the number of bytes in the data
+ - Form type: 4 bytes, 4 letters (can be CPPO, PAL, RDIB, RMID, RMMP, WAVE)
+ - The actual data
+The data is made of RIFF subchunks that follow the exact same format as above, but without the "form type" field.
