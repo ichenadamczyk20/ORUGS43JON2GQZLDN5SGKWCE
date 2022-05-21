@@ -38,36 +38,41 @@ public class SoundStegSolve {
       byte[] wav = converter(soundFile);
       byte[] wav2 = converter(soundFileNew);
 
+      // okay looking back things don't suck that much
+
       int currentPowerOfTwo = 7; // goes from 7 to 0
-      int currentIndex = 0;
-      byte currentByte = 0B00000000 - 128;
+      int currentInt = 0;
       boolean continuing = true;
+      int bitsFound = 0;
 
       for (int i = 44; i < wav.length; i++) {
-        if (wav[i] != wav2[i]) {
-          if ((wav2[i] & (0B00000001 - 128)) == 0B00000001 - 128) {
-            currentByte |= (0B00000001 - 128);
-          } else {
-            System.out.println("FALSE");
+        int tmp1 = wav[i] + 128;
+        int tmp2 = wav2[i] + 128;
+        if (tmp1 != tmp2) {
+          bitsFound ++;
+          if ((tmp2 & 7) == 6) {
+            currentInt = currentInt | 1;
           }
           currentPowerOfTwo = currentPowerOfTwo - 1;
-          currentByte = (byte) (currentByte << 1);
           if (currentPowerOfTwo < 0) {
-            out.write(currentByte);
+            out.write(currentInt - 128);
             currentPowerOfTwo = 7;
-            currentIndex += 1;
-            currentByte = 0B00000000 - 128;
+            currentInt = 0;
+          } else {
+            currentInt = currentInt << 1;
           }
         }
       }
 
       System.out.println("file written now go read it");
+      System.out.println("Number of bytes found");
+      System.out.println(bitsFound / 8);
 
       out.close();
-    }catch(FileNotFoundException e){
+    } catch(FileNotFoundException e){
       System.out.println("ERROR: File not found");
       e.printStackTrace();
-    }catch(IOException e){
+    } catch(IOException e){
       System.out.println("IO Exception");
       e.printStackTrace();
     }
