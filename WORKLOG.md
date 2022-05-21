@@ -25,3 +25,5 @@ Alex Cho is now `owo`
 `owo` and `:3` (18:45 May 20): Met up on repl.it and zoom and implemented a steganography program for .wav files
 
 `:3` (02:06 May 21): Annoying. Took 3.5 hours, but I have a rudimentary steganography audio that functions as a proof of concept. Will go over it with `owo` to see if we can come up with a better approach.
+
+`:3` (17:55 May 21): Tried my best to understand mp3 decoding after 45 minutes with little to no luck.
