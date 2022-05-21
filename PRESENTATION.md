@@ -46,3 +46,37 @@ A RIFF chunk looks like this:
  - The actual data
 
 The data is made of RIFF subchunks that follow the exact same format as above, but without the "form type" field.
+
+### What is a .mp3 file?
+###### source: http://blog.bjrn.se/2008/10/lets-build-mp3-decoder.html
+###### source: http://www.mp3-tech.org/programmer/frame_header.html
+###### source: http://www.datavoyage.com/mpgscript/mpeghdr.htm
+Compressed audio using the following facts about audio:
+ - Humans can only hear from between 20 kHz and 20 Hz, and depending on the frequency, the sound might have to be very loud even for the person to perceive it.
+ - The loudest frequencies ("signals") will drown out quieter ones.
+ - Various psychoacoustic models that may be used when *encoding* an mp3 file (but you don't need to know these to decode an mp3 file)
+
+MP3 files work as follows:
+ - Fun fact: the ISO specifications for MP3 are proprietary. To view them, you'd have to pay at least 203.09 dollars.
+ - There is no header. The MP3 file is built by concatenating frames.
+ - They are split into data chunks:
+ - - Each chunk has a header, an optional checksum, and the data (which contains exactly 576 samples)
+ - - - Headers begin with a hex that looks like: `FFFB7864` (4 bytes, 32 bits)
+ - - - - The exact bits are: `11111111111 (2 bits, specify mpeg version) (2 bits, specify layer description) (1 bit, protected by CRC?) (4 bits, the bit rate index, must specify a multiple of 32kbps) (2 bits, sampling rate frequency) (1 bit, are frames padded with a single bit to exactly fit the bit rate?) (1 bit, private bit) (2 bits, channel mode) (2 bits, mode extension) (1 bit, copyrighted?) (1 bit, original media?) (2 bits, emphasis setting)`
+ - - The data uses huffman coding (which allows it to be stored in about 1/8 the size). Each atom encoded here represents a number from -8206 to 8206, which can be looked up in a 70 kb Huffman table. The number must be raised to the `4/3` power and multiplied by the desired volume factor. 
+ - - - Sometimes the data gets re-ordered for efficiency, so you have to put it back in order.
+ - - - This next part is beyond the scope of steganography, but the output is filtered through band passes and transformed by the MDCT (modified discrete cosinte transform).
+ - At the end, you get your Audio Tag ID3v1
+ - - `3 bytes`: "TAG"
+ - - `30 bytes`: Title
+ - - `30 bytes`: Artist
+ - - `30 bytes`: Album
+ - - `4 bytes`: Year
+ - - `30 bytes`: Comment
+ - - `1 byte`: Genre (ranging from `Blues` to `Dance Hall`)
+
+What is Huffman coding: The idea is that if you know that A will appear more frequently than B than C than D, you can use the following encoding:
+ - `A = 0`
+ - `B = 10`
+ - `C = 110
+ - `D = 111`
