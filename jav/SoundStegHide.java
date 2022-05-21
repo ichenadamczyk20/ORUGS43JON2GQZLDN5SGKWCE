@@ -40,44 +40,57 @@ public class SoundStegHide {
             byte[] wav = converter(soundFile);
             byte[] inp = converter(inputFile);
 
-            int currentPowerOfTwo = 7; // goes from 7 to 0
-            byte quBit = 0B10000000 - 128;
-            int currentIndex = 0;
-            boolean continuing = true;
-
             byte[] tmp2 = new byte[44];
             for(int i = 0; i < tmp2.length; i++){
                 tmp2[i] = wav[i];
             }
             out.write(tmp2);
 
-            for (int i = 44; i < wav.length; i++) {
-                byte tmp = wav[i];
-                if ((tmp & (0B00000111 - 128)) == (0B00000000 - 128)) {
+            // okay this is where things really SUCK SUCK SUCK JUST KILL ME
+            // good luck alex
+
+            int currentPowerOfTwo = 7; // goes from 7 to 0
+            int currentIndex = 0;
+            int currentInt = inp[currentIndex] + 128;
+            int rightMost = 0B10000000;
+            boolean continuing = true;
+            int numberOfBits = 0;
+
+            for (int i = 44; i < wav.length - 1; i++) {
+                int tmp = wav[i] + 128;
+                if ((tmp & 7) == 7) {
                     if (continuing) {
-                        byte bit = (byte) (inp[currentIndex] & quBit);
-                        tmp |= (0B00000001 - 128);
-                        if (bit == (byte) (0B00000000 - 128)) {
-                            System.out.println("FALSE");
-                            tmp &= (0B11111110 - 128);
+                        int bit = currentInt & rightMost;
+                        if (bit != 0) {
+                            tmp = tmp - 1;
+                        } else {
+                            tmp = tmp - 2;
                         }
                         currentPowerOfTwo --;
-                        quBit = (byte) (quBit >> 1);
                         if (currentPowerOfTwo < 0) {
                             currentPowerOfTwo = 7;
-                            quBit = 0B10000000 - 128;
                             currentIndex += 1;
                             if (currentIndex >= inp.length) {
                                 continuing = false;
+                            } else {
+                                currentInt = inp[currentIndex] + 128;
                             }
+                        } else {
+                            currentInt = currentInt << 1;
                         }
+                        numberOfBits++;
+                    } else {
+                        tmp = tmp | 2;
                     }
                 }
 
-                out.write(tmp);
+                out.write(tmp - 128);
             }
+            out.write(wav[wav.length - 1]);
 
             System.out.println("file written now play it and see if you hear the difference");
+            System.out.println("Number of bytes added for the file");
+            System.out.println(numberOfBits / 8);
 
             out.close();
         }catch(FileNotFoundException e){
