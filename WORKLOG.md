@@ -28,4 +28,4 @@ Alex Cho is now `owo`
 
 `:3` (17:55 May 21): Tried my best to understand mp3 decoding after 45 minutes with little to no luck. <sup>(20:00 May 22) apparently I don't understand ogg/vorbis either `:(`</sup>
 
-`:3` (15:30 May 23): OGG Steg Hide created without incident! (Only bugs were: for some reason, bytes were from 0 to 255 instead of -128 to 127 on the lab machine, and bad loop logic.) Maybe uploading the entire SuperTuxKart OST was excessive (but definitely nostalgic).
+`:3` (15:30 May 23): OGG Steg Hide created without incident! (Only bugs were: for some reason, bytes were from 0 to 255 instead of -128 to 127 on the lab machine, and bad loop logic.) Maybe uploading the entire SuperTuxKart OST was excessive (but definitely nostalgic). Also Mr. K suggested we figure out Audio Spectrogram Steganography.
