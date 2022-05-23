@@ -26,4 +26,4 @@ Alex Cho is now `owo`
 
 `:3` (02:06 May 21): Annoying. Took 3.5 hours, but I have a rudimentary steganography audio that functions as a proof of concept. Will go over it with `owo` to see if we can come up with a better approach.
 
-`:3` (17:55 May 21): Tried my best to understand mp3 decoding after 45 minutes with little to no luck.
+`:3` (17:55 May 21): Tried my best to understand mp3 decoding after 45 minutes with little to no luck. <sup>(20:00 May 22) apparently I don't understand ogg/vorbis either `:(`</sup>
