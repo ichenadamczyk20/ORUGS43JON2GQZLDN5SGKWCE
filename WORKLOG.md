@@ -27,3 +27,5 @@ Alex Cho is now `owo`
 `:3` (02:06 May 21): Annoying. Took 3.5 hours, but I have a rudimentary steganography audio that functions as a proof of concept. Will go over it with `owo` to see if we can come up with a better approach.
 
 `:3` (17:55 May 21): Tried my best to understand mp3 decoding after 45 minutes with little to no luck. <sup>(20:00 May 22) apparently I don't understand ogg/vorbis either `:(`</sup>
+
+`:3` (15:30 May 23): OGG Steg Hide created without incident! (Only bugs were: for some reason, bytes were from 0 to 255 instead of -128 to 127 on the lab machine, and bad loop logic.) Maybe uploading the entire SuperTuxKart OST was excessive (but definitely nostalgic).
