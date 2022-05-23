@@ -56,7 +56,7 @@ Compressed audio using the following facts about audio:
  - The loudest frequencies ("signals") will drown out quieter ones.
  - Various psychoacoustic models that may be used when *encoding* an mp3 file (but you don't need to know these to decode an mp3 file)
 
-MP3 files work as follows:
+MP3 files work as follows: (If you don't want to deal with all of this, then probably use FFMpeg or LAME for your program.)
  - Fun fact: the ISO specifications for MP3 are proprietary. To view them, you'd have to pay at least 203.09 dollars.
  - There is no header. The MP3 file is built by concatenating frames.
  - They are split into data chunks:
@@ -78,5 +78,20 @@ MP3 files work as follows:
 What is Huffman coding: The idea is that if you know that A will appear more frequently than B than C than D, you can use the following encoding:
  - `A = 0`
  - `B = 10`
- - `C = 110
+ - `C = 110`
  - `D = 111`
+
+
+### What is a .ogg file?
+###### source: https://www.file-recovery.com/ogg-signature-format.htm
+###### source: https://fileformats.fandom.com/wiki/Ogg
+###### source: https://xiph.org/vorbis/doc/Vorbis_I_spec.html
+OGG files are files that can compress as well as, if not better than MP3, and the best part is that the specifications are open-source. So what's in a .ogg file?
+
+.ogg files are split into data packets. Each data packet has the following:
+ - A 27 byte header
+ - - A tag of 4 bytes: `OggS` (or hex `4F 67 67 53`)
+ - - 21 bytes of version, header type, granule position, bitstream serial number, page sequence number, checksum.
+ - - 1 byte to indicate the number of segments in the packet, and 1 byte to indicate the size of each segment in bytes.
+
+It's pretty complicated. Just use `libogg` and `libvorbis`, they're open source after all.
