@@ -31,3 +31,5 @@ Alex Cho is now `owo`
 `:3` (15:30 May 23): OGG Steg Hide created without incident! (Only bugs were: for some reason, bytes were from 0 to 255 instead of -128 to 127 on the lab machine, and bad loop logic.) Maybe uploading the entire SuperTuxKart OST was excessive (but definitely nostalgic). Also Mr. K suggested we figure out Audio Spectrogram Steganography.
 
 `owo` (15:35 May 24): Researched AIFF Files and began building the code for it
+
+`owo` (17:44 May 24): Finished AIFF Steg Code
