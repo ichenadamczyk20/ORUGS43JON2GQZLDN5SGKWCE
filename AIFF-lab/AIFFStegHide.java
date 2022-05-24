@@ -46,17 +46,14 @@ public class AIFFStegHide {
             }
             out.write(tmp2);
 
-            // okay this is where things really SUCK SUCK SUCK JUST KILL ME
-            // good luck alex
-
-            int currentPowerOfTwo = 7; // goes from 7 to 0
+            int currentPowerOfTwo = 7;
             int currentIndex = 0;
             int currentInt = inp[currentIndex] + 128;
             int rightMost = 0B10000000;
             boolean continuing = true;
             int numberOfBits = 0;
 
-            for (int i = 44; i < wav.length - 1; i++) {
+            for (int i = 42; i < wav.length - 1; i++) {
                 int tmp = wav[i] + 128;
                 if ((tmp & 7) == 7) {
                     if (continuing) {
