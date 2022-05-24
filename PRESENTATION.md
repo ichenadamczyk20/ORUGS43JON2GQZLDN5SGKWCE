@@ -95,3 +95,8 @@ OGG files are files that can compress as well as, if not better than MP3, and th
  - - 1 byte to indicate the number of segments in the packet, and 1 byte to indicate the size of each segment in bytes.
 
 It's pretty complicated. Just use `libogg` and `libvorbis`, they're open source after all.
+
+### What is a .aiff file?
+###### source: http://paulbourke.net/dataformats/audio/
+AIFF (Audio Interchange File Format) files are used to usually store uncompressed pulse-code modulation (PCM). Because of this, these files tend to take up much more space than mp3 files. AIFF Files are commonly found on Apple devices.
+
