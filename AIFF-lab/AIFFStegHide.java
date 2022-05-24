@@ -40,7 +40,7 @@ public class AIFFStegHide {
             byte[] wav = converter(soundFile);
             byte[] inp = converter(inputFile);
 
-            byte[] tmp2 = new byte[26];
+            byte[] tmp2 = new byte[42];
             for(int i = 0; i < tmp2.length; i++){
                 tmp2[i] = wav[i];
             }
