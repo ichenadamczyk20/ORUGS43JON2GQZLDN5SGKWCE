@@ -101,3 +101,4 @@ It's pretty complicated. Just use `libogg` and `libvorbis`, they're open source 
 ###### source: http://midi.teragonaudio.com/tech/aiff.htm
 AIFF (Audio Interchange File Format) files are used to usually store uncompressed pulse-code modulation (PCM). Because of this, these files tend to take up much more space than mp3 files. AIFF Files are commonly found on Apple devices.
 
+AIFF Files require a common chunk, where information about the soundfile, is stored, along with a sound chunk, where the actual audio is stored. The common chunk functions as a header for the audio file and is 26 bytes long.
