@@ -26,10 +26,11 @@ public class SpectroStegHide {
 
     public static void main(String[] args){
         try{
-            System.out.println("Usage: java OGGStegHide <file to hide> <output audio>");
+            System.out.println("Usage: java SpectroStegHide <input audio> <file to hide> <output audio>");
 
-            String inputFile = args[0];
-            String outputSound = args[1];
+            String inputSound = args[0];
+            String inputFile = args[1];
+            String outputSound = args[2];
 
 
             File file = new File(outputSound);
@@ -49,57 +50,10 @@ public class SpectroStegHide {
             //TEST THIS WITH XXD
 
             byte[] header = new byte[44];
-            byte[] holder = converter("sample.wav");
+            byte[] holder = converter(inputSound);
             for(int i = 0; i < 44; i++){
               header[i] = holder[i];
             }
-            /*
-            byte[0] = 82;
-            byte[1] = 73;
-            byte[2] = 70;
-            byte[3] = 70;
-            byte[4] = 0;
-            byte[5] = 0;
-            byte[6] = 0;
-            byte[7] = 0;
-            byte[8] = 87;
-            byte[9] = 65;
-            byte[10] = 86;
-            byte[11] = 69;
-            byte[12] = 102;
-            byte[13] = 109;
-            byte[14] = 116;
-            byte[15] = 32;
-            byte[16] = 0;
-            byte[17] = 0;
-            byte[18] = 0;
-            byte[19] = 16;
-            byte[20] = 0;
-            byte[21] = 1;
-            byte[22] = 0;
-            byte[23] = 1;
-            byte[24] = 0;
-            byte[25] = 0;
-            byte[26] = 172;
-            byte[27] = 68;
-            byte[28] = 0;
-            byte[29] = 1;
-            byte[30] = 88;
-            byte[31] = 136;
-            byte[32] = 0;
-            byte[33] = 0;
-            byte[34] = 0;
-            byte[35] = 0;
-            byte[36] = 0;
-            byte[37] = 0;
-            byte[38] = 0;
-            byte[39] = 0;
-            byte[40] = 0;
-            byte[41] = 0;
-            byte[42] = 0;
-            byte[43] = 0;
-            byte[44] = 0;
-*/
 
             int[] indices = new int[(int) (inp.length / 100) + 1];
             int currentIndex = 0;
