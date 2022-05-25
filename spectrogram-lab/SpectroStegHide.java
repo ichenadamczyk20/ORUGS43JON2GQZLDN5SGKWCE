@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.*;
-import javax.imageio;
+import javax.imageio.*;
+import java.awt.image.BufferedImage;
+import java.lang.Math;
 
 public class SpectroStegHide {
     public static byte[] converter (String filename){
@@ -28,79 +30,38 @@ public class SpectroStegHide {
         try{
             System.out.println("Usage: java SpectroStegHide <input audio> <file to hide> <output audio>");
 
-            String inputSound = args[0];
-            String inputFile = args[1];
-            String outputSound = args[2];
+            String inputFile = args[0];
+            String outputSound = args[1];
 
 
             File file = new File(outputSound);
             FileOutputStream out = new FileOutputStream(file);
-            // byte[] data = new byte[(int)file.length()];
-            // out.write(data);
 
             BufferedImage img = ImageIO.read(new File(inputFile));
 
-            // byte[] tmp2 = new byte[44];
-            // for(int i = 0; i < tmp2.length; i++){
-            //     tmp2[i] = wav[i];
-            // }
-            // out.write(tmp2);
+            byte[] header = new byte[]{-46, -55, -58, -58, 44, -40, -127, -128, -41, -63, -42, -59, -26, -19, -12, -96, -112, -128, -128, -128, -127, -128, -127, -128, -60, 44, -128, -128, 8, -40, -127, -128, -126, -128, -112, -128, -28, -31, -12, -31, 8, -40, -127, -128};
+            out.write(header);
 
-            // okay this is where thing
-            //TEST THIS WITH XXD
+            int width = img.getWidth();
+            int height = img.getHeight();
 
-            byte[] header = new byte[44];
-            byte[] holder = converter(inputSound);
-            for(int i = 0; i < 44; i++){
-              header[i] = holder[i];
-            }
-
-            int[] indices = new int[(int) (inp.length / 100) + 1];
-            int currentIndex = 0;
-            for (int i = 1; i < ogg.length - 3; i++) {
-                if (ogg[i] == 79) {
-                    if (ogg[i + 1] == 103)
-                        if (ogg[i + 2] == 103)
-                            if (ogg[i + 3] == 83) {
-                                //System.out.println(i);
-                                if (currentIndex >= indices.length) break;
-                                indices[currentIndex] = i;
-                                currentIndex ++;
-                            }
+            int t = 1; // HARD CODED to ONE SECOND o KAY?
+            int lowFreq = 200;
+            int highFreq = 8000;
+            for (int x = 0; x < width; x++) {
+                double ty = t / ((double) x);
+                double val = 0;
+                for (int y = 0; y < height; y++) {
+                    int red = img.getRGB(x, y) / (256 * 256);
+                    int green = (img.getRGB(x, y) / 256) % 256;
+                    int blue = img.getRGB(x, y) % 256;
+                    double grey = (red + green + blue) / ((double) 768);
+                    double freq = (((double) y) * (highFreq - lowFreq) / height) + lowFreq;
+                    val += grey * Math.sin(ty * freq * 2 * 3.1415926);
                 }
+                byte theActual = (byte) ((int) (64 * val));
+                out.write(theActual);
             }
-
-            for (int index: indices) {
-                //System.out.println(index);
-            }
-
-            // now insert 100 bytes of data before each header
-            currentIndex = 0;
-            int cursor = 0;
-            boolean writing = true;
-            int numberOfBytes = 0;
-            for (int i = 0; i < ogg.length; i++) {
-                if (currentIndex < indices.length && i == indices[currentIndex] && writing) {
-                    for (int j = 0; j < 100; j++) {
-                        if (cursor + j >= inp.length) {
-                            writing = false;
-                            break;
-                        }
-                        out.write(inp[cursor + j]);
-                        numberOfBytes++;
-                    }
-                    cursor += 100;
-                    currentIndex++;
-                }
-                out.write(ogg[i]);
-            }
-
-            System.out.println("file written now play it and see if you hear the difference");
-            System.out.println("Number of bytes added for the file");
-            System.out.println(numberOfBytes);
-            System.out.println("Size of file");
-            System.out.println(inp.length);
-
             out.close();
         }catch(FileNotFoundException e){
             System.out.println("ERROR: File not found");
