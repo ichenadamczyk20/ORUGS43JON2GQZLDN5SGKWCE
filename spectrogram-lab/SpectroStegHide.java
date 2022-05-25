@@ -49,6 +49,11 @@ public class SpectroStegHide {
             //TEST THIS WITH XXD
 
             byte[] header = new byte[44];
+            byte[] holder = converter("sample.wav");
+            for(int i = 0; i < 44; i++){
+              header[i] = holder[i];
+            }
+            /*
             byte[0] = 82;
             byte[1] = 73;
             byte[2] = 70;
@@ -94,7 +99,7 @@ public class SpectroStegHide {
             byte[42] = 0;
             byte[43] = 0;
             byte[44] = 0;
-
+*/
 
             int[] indices = new int[(int) (inp.length / 100) + 1];
             int currentIndex = 0;
