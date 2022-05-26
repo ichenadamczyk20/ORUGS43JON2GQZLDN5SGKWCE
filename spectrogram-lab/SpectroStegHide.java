@@ -29,7 +29,7 @@ public class SpectroStegHide {
 
     public static void main(String[] args){
         try{
-            System.out.println("Usage: java SpectroStegHide<file to hide> <output audio>");
+            System.out.println("Usage: java SpectroStegHide <file to hide> <output audio>");
             String inputFile = args[0];
             String outputSound = args[1];
 
@@ -38,8 +38,8 @@ public class SpectroStegHide {
 
             BufferedImage img = ImageIO.read(new File(inputFile));
 
-            byte[] header = new byte[]{-46, -55, -58, -58, 44, -40, -127, -128, -41, -63, -42, -59, -26, -19, -12, -96, -112, -128, -128, -128, -127, -128, -127, -128, -60, 44, -128, -128, 8, -40, -127, -128, -126, -128, -112, -128, -28, -31, -12, -31, 8, -40, -127, -128};
-            byte[] conclusion = new byte[img.getWidth() * 40 + 44];
+            byte[] header = new byte[]{82, 73, 70, 70, -84, 88, 1, 0, 87, 65, 86, 69, 102, 109, 116, 32, 16, 0, 0, 0, 1, 0, 1, 0, 68, -84, 0, 0, -120, 88, 1, 0, 2, 0, 16, 0, 100, 97, 116, 97, -120, 88, 1, 0};
+            byte[] conclusion = new byte[96000 + 44];
             for(int i = 0; i < 44; i++){
               conclusion[i] = header[i];
             }
@@ -50,21 +50,24 @@ public class SpectroStegHide {
             int t = 1; // HARD CODED to ONE SECOND o KAY?
             int lowFreq = 200;
             int highFreq = 8000;
-            for (int x = 0; x < 64 * width; x++) {
-                double ty = t / ((double) x * 64);
+            int samplesPerPx = (int) ((int) 48000 / (int) img.getWidth());
+            int x = -1;
+            for (int s = 0; s < 48000; s++) {
+                double ty = t / ((double) s);
                 double val = 0;
+                if ((s % samplesPerPx) == 0 && (x < width - 1))
+                    x++;
                 for (int y = 0; y < height; y++) {
-                    int red = img.getRGB(x, y) / (256 * 256);
-                    int green = (img.getRGB(x, y) / 256) % 256;
-                    int blue = img.getRGB(x, y) % 256;
+                    int red = img.getRGB(x, y) >> 16;
+                    int green = (img.getRGB(x, y) << 16) >> 24;
+                    int blue = (img.getRGB(x, y) << 24) >> 32;
                     double grey = (red + green + blue) / ((double) 768);
                     double freq = (((double) y) * (highFreq - lowFreq) / height) + lowFreq;
                     val += grey * Math.sin(ty * freq * 2 * 3.1415926);
                 }
                 byte theActual = (byte) ((int) (64 * val));
-                for(int i = 0; i < 64; i++){
-                  conclusion[x + 44 + i] = theActual;
-                }
+                conclusion[s * 2 + 44] = 0;
+                conclusion[s * 2 + 1 + 44] = theActual;
             }
             out.write(conclusion);
             out.close();
