@@ -39,3 +39,9 @@ Alex Cho is now `owo`
 `owo` (15:35 May 25): Edited a slight bit of the spectrogram program 
 
 `owo` (20:30 May 25): Changed writing in visual spectrography 
+
+`owo` (15:05 May 26): Invented the Kalman gain factor, a number from 1.5 to 75.5
+
+`:3` (15:35 May 26): Got the spectrography program to fill an entire 1s audio file with alien looking waveforms
+
+`owo` (15:35 May 26): Applying expert technical knowledge of image.getRGB to investigate the bugs, cut short by end bell
