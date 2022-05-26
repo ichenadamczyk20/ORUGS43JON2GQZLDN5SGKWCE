@@ -37,3 +37,5 @@ Alex Cho is now `owo`
 `:3` (15:35 May 25): Started the spectrogram program, probably just need to get it to print to a valid WAV file
 
 `owo` (15:35 May 25): Edited a slight bit of the spectrogram program 
+
+`owo` (20:30 May 25): Changed writing in visual spectrography 
