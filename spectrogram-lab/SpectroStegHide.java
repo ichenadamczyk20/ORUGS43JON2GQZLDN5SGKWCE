@@ -58,9 +58,10 @@ public class SpectroStegHide {
                 if ((s % samplesPerPx) == 0 && (x < width - 1))
                     x++;
                 for (int y = 0; y < height; y++) {
-                    int red = img.getRGB(x, y) >> 16;
-                    int green = (img.getRGB(x, y) << 16) >> 24;
-                    int blue = (img.getRGB(x, y) << 24) >> 32;
+                  color = img.getRGB(x,y);
+                    int blue = color & 0xff;
+                    int green = (color & 0xff00) >> 8;
+                    int red = (color & 0xff0000) >> 16;
                     double grey = (red + green + blue) / ((double) 768);
                     double freq = (((double) y) * (highFreq - lowFreq) / height) + lowFreq;
                     val += grey * Math.sin(ty * freq * 2 * 3.1415926);
