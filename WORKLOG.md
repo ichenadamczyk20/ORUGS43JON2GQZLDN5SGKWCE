@@ -44,4 +44,4 @@ Alex Cho is now `owo`
 
 `:3` (15:35 May 26): Got the spectrography program to fill an entire 1s audio file with alien looking waveforms
 
-`owo` (15:35 May 26): Applying expert technical knowledge of image.getRGB to investigate the bugs, cut short by end bell
+`owo` (15:35 May 26): Applying expert technical knowledge of image.getRGB to investigate the bugs, cut short by end bell (correction: I DID IT!?!!?!!)
