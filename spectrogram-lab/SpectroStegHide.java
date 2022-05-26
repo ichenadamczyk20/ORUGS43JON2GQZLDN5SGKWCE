@@ -50,8 +50,8 @@ public class SpectroStegHide {
             int t = 1; // HARD CODED to ONE SECOND o KAY?
             int lowFreq = 200;
             int highFreq = 8000;
-            for (int x = 0; x < 40 * width; x++) {
-                double ty = t / ((double) x * 40);
+            for (int x = 0; x < 64 * width; x++) {
+                double ty = t / ((double) x * 64);
                 double val = 0;
                 for (int y = 0; y < height; y++) {
                     int red = img.getRGB(x, y) / (256 * 256);
@@ -62,7 +62,7 @@ public class SpectroStegHide {
                     val += grey * Math.sin(ty * freq * 2 * 3.1415926);
                 }
                 byte theActual = (byte) ((int) (64 * val));
-                for(int i = 0; i < 40; i++){
+                for(int i = 0; i < 64; i++){
                   conclusion[x + 44 + i] = theActual;
                 }
             }
