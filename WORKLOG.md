@@ -35,4 +35,5 @@ Alex Cho is now `owo`
 `owo` (17:44 May 24): Finished AIFF Steg Code
 
 `:3` (15:35 May 25): Started the spectrogram program, probably just need to get it to print to a valid WAV file
+
 `owo` (15:35 May 25): Edited a slight bit of the spectrogram program 
