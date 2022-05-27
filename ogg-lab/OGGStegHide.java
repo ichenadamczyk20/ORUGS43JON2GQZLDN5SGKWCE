@@ -63,10 +63,6 @@ public class OGGStegHide {
                 }
             }
 
-            for (int index: indices) {
-                //System.out.println(index);
-            }
-
             // now insert 100 bytes of data before each header
             currentIndex = 0;
             int cursor = 0;
