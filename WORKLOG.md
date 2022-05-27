@@ -51,3 +51,5 @@ Alex Cho is now `owo`
 `:3` (15:10 May 27): Made spectrogram work over 10s instead of 1s, so higher definition
 
 `owo` (15:30 May 27): Created OGG Steg Solve, debugging Steg Hide now
+
+`owo` (18:50 May 27): Found issue in Steg Solve instead of Steg Hide, fixed OGG Steg Solve
