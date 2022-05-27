@@ -47,3 +47,5 @@ Alex Cho is now `owo`
 `owo` (15:35 May 26): Applying expert technical knowledge of image.getRGB to investigate the bugs, cut short by end bell (correction: I DID IT!?!!?!!)
 
 `:3` (02:09 May 27): Very simple changes to fix steganography: ty should be s * 1/48000 not 1/s, and height should be 0 -> lowFreq instead of 0 -> highFreq
+
+`:3` (15:10 May 27): Made spectrogram work over 10s instead of 1s, so higher definition
