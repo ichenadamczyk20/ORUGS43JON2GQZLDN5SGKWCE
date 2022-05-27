@@ -10,6 +10,6 @@
  - Practice presentation together
  - Test HW and make sure it's not too annoying
 
-## KINDA UNIMPORTANT BUT I WANT TO DO IT ANYWAY
+### KINDA UNIMPORTANT BUT I WANT TO DO IT ANYWAY
  - "Reverse engineer" LAME and design MP3 stega
  - Understand video file formats enough to present on it?
