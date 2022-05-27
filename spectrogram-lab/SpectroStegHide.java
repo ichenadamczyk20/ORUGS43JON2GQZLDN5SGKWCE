@@ -54,7 +54,7 @@ public class SpectroStegHide {
             int samplesPerPx = (int) ((int) 480000 / (int) img.getWidth());
             int x = -1;
             for (int s = 0; s < 480000; s++) {
-                double ty = s * t / ((double) 480000);
+                double ty = s * t / ((double) 480000 );
                 double val = 0;
                 if ((s % samplesPerPx) == 0 && (x < width - 1))
                     x++;
