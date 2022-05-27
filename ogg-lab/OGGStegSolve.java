@@ -40,10 +40,14 @@ public class OGGStegSolve {
 
       // okay looking back things don't suck that much
       int offset = 0;
-      for(int i = 0; i < wav2.length; i++){
+      boolean diff = false;
+      for(int i = 0; i < wav2.length - 99; i++){
         if(wav[i - offset] != wav2[i]){
-          out.write(wav2[i]);
-          offset ++;
+          for(int j = 0; j < 100; j++){
+            out.write(wav2[i + j]);
+          }
+          offset += 100;
+          i += 100;
         }
 
       }
