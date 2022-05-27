@@ -50,20 +50,21 @@ public class SpectroStegHide {
             int t = 1; // HARD CODED to ONE SECOND o KAY?
             int lowFreq = 200;
             int highFreq = 8000;
+            double factor = (highFreq - lowFreq) / ((double) height);
             int samplesPerPx = (int) ((int) 48000 / (int) img.getWidth());
             int x = -1;
             for (int s = 0; s < 48000; s++) {
-                double ty = t / ((double) s);
+                double ty = s * t / ((double) 48000);
                 double val = 0;
                 if ((s % samplesPerPx) == 0 && (x < width - 1))
                     x++;
                 for (int y = 0; y < height; y++) {
-                  color = img.getRGB(x,y);
+                    int color = img.getRGB(x,y);
                     int blue = color & 0xff;
                     int green = (color & 0xff00) >> 8;
                     int red = (color & 0xff0000) >> 16;
                     double grey = (red + green + blue) / ((double) 768);
-                    double freq = (((double) y) * (highFreq - lowFreq) / height) + lowFreq;
+                    double freq = ((height - y) * factor) + lowFreq;
                     val += grey * Math.sin(ty * freq * 2 * 3.1415926);
                 }
                 byte theActual = (byte) ((int) (64 * val));
