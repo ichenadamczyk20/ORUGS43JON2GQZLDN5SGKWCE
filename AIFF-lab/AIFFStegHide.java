@@ -48,13 +48,13 @@ public class AIFFStegHide {
 
             int currentPowerOfTwo = 7;
             int currentIndex = 0;
-            int currentInt = inp[currentIndex] + 128;
+            int currentInt = inp[currentIndex];
             int rightMost = 0B10000000;
             boolean continuing = true;
             int numberOfBits = 0;
 
             for (int i = 42; i < wav.length - 1; i++) {
-                int tmp = wav[i] + 128;
+                int tmp = wav[i];
                 if ((tmp & 7) == 7) {
                     if (continuing) {
                         int bit = currentInt & rightMost;
@@ -70,7 +70,7 @@ public class AIFFStegHide {
                             if (currentIndex >= inp.length) {
                                 continuing = false;
                             } else {
-                                currentInt = inp[currentIndex] + 128;
+                                currentInt = inp[currentIndex];
                             }
                         } else {
                             currentInt = currentInt << 1;
@@ -81,7 +81,7 @@ public class AIFFStegHide {
                     }
                 }
 
-                out.write(tmp - 128);
+                out.write(tmp);
             }
             out.write(wav[wav.length - 1]);
 
