@@ -11,5 +11,6 @@
  - Test HW and make sure it's not too annoying
 
 ### KINDA UNIMPORTANT BUT I WANT TO DO IT ANYWAY
+ - Make sure StegHides and StegSolve have no unhandled exceptions
  - "Reverse engineer" LAME and design MP3 stega
  - Understand video file formats enough to present on it?
