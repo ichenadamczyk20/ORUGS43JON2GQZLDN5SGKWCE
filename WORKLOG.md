@@ -53,3 +53,5 @@ Alex Cho is now `owo`
 `owo` (15:30 May 27): Created OGG Steg Solve, debugging Steg Hide now
 
 `owo` (18:50 May 27): Found issue in Steg Solve instead of Steg Hide, fixed OGG Steg Solve
+
+`:3` (21:10 May 27): Used square-root curving to make the SpectroStegHide look SO GOOOD!
