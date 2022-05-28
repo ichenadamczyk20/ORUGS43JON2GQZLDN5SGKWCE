@@ -44,8 +44,8 @@ public class AIFFStegSolve {
       int bitsFound = 0;
 
       for (int i = 42; i < wav.length; i++) {
-        int tmp1 = wav[i] + 128;
-        int tmp2 = wav2[i] + 128;
+        int tmp1 = wav[i];
+        int tmp2 = wav2[i];
         if (tmp1 != tmp2) {
           bitsFound ++;
           if ((tmp2 & 7) == 6) {
@@ -53,7 +53,7 @@ public class AIFFStegSolve {
           }
           currentPowerOfTwo = currentPowerOfTwo - 1;
           if (currentPowerOfTwo < 0) {
-            out.write(currentInt - 128);
+            out.write(currentInt);
             currentPowerOfTwo = 7;
             currentInt = 0;
           } else {
