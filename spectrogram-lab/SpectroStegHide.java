@@ -67,7 +67,21 @@ public class SpectroStegHide {
                     double freq = ((height - y) * factor) + lowFreq;
                     val += grey * Math.sin(ty * freq * 2 * 3.1415926);
                 }
-                byte theActual = (byte) ((int) (16 * val));
+
+                /*if (((s % samplesPerPx) > (samplesPerPx * 0.95)) && (x < width - 1)) {
+                    for (int y = 0; y < height; y++) {
+                        int color = (int) ((0.5 * img.getRGB(x,y)) + (0.5 * img.getRGB(x + 1, y)));
+                        int blue = color & 0xff;
+                        int green = (color & 0xff00) >> 8;
+                        int red = (color & 0xff0000) >> 16;
+                        double grey = (red + green + blue) / ((double) 768);
+                        double freq = ((height - y) * factor) + lowFreq;
+                        val += grey * Math.sin(ty * freq * 2 * 3.1415926);
+                    }
+                }*/
+                byte theActual;
+                if (val > 0) theActual = (byte) ((int) (20 * Math.pow(val, 0.3)));
+                else theActual = (byte) ((int) (-20 * Math.pow(-1 * val, 0.3)));
                 conclusion[s * 2 + 44] = 0;
                 conclusion[s * 2 + 1 + 44] = theActual;
             }
