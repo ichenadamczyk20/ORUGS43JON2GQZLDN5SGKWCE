@@ -56,4 +56,6 @@ Alex Cho is now `owo`
 
 `:3` (21:10 May 27): Used square-root curving to make the SpectroStegHide look SO GOOOD!
 
-`owo` (19:31 May 28): Changed AIFF and WAV code to work without using the original file
+`owo` (21:31 May 28): Changed AIFF and WAV code to work without using the original file
+
+`owo` (21:43 May 28): Removed unnecessary files from AIFF and WAV steg
