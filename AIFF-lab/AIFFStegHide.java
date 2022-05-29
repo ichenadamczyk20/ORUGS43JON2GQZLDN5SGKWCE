@@ -66,7 +66,7 @@ public class AIFFStegHide {
                         currentPowerOfTwo --;
                         out.write(tmp);
                         wav[i+1] |= 3;
-                        out.write(wav[i]);
+                        out.write(wav[i + 1]);
                         i++;
                         if (currentPowerOfTwo < 0) {
                             currentPowerOfTwo = 7;
@@ -80,6 +80,9 @@ public class AIFFStegHide {
                             currentInt = currentInt << 1;
                         }
                         numberOfBits++;
+                    }else{
+                      tmp -= 1;
+                      out.write(tmp);
                     }
                 }else{
                   if((tmp & 3) == 3){
@@ -88,6 +91,7 @@ public class AIFFStegHide {
                   out.write(tmp);
                 }
               }
+            out.write(wav[wav.length - 2]);
             out.write(wav[wav.length - 1]);
 
             System.out.println("file written now play it and see if you hear the difference");
