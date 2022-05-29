@@ -37,12 +37,12 @@ public class AIFFStegHide {
             // byte[] data = new byte[(int)file.length()];
             // out.write(data);
 
-            byte[] wav = converter(soundFile);
+            byte[] aiff = converter(soundFile);
             byte[] inp = converter(inputFile);
 
             byte[] tmp2 = new byte[42];
             for(int i = 0; i < tmp2.length; i++){
-                tmp2[i] = wav[i];
+                tmp2[i] = aiff[i];
             }
             out.write(tmp2);
 
@@ -53,8 +53,8 @@ public class AIFFStegHide {
             boolean continuing = true;
             int numberOfBits = 0;
 
-            for (int i = 42; i < wav.length - 1; i++) {
-                int tmp = wav[i];
+            for (int i = 42; i < aiff.length - 1; i++) {
+                int tmp = aiff[i];
                 if ((tmp & 7) == 7) {
                     if (continuing) {
                         int bit = currentInt & leftMost;
@@ -65,8 +65,8 @@ public class AIFFStegHide {
                         }
                         currentPowerOfTwo --;
                         out.write(tmp);
-                        wav[i+1] |= 3;
-                        out.write(wav[i + 1]);
+                        aiff[i+1] |= 3;
+                        out.write(aiff[i + 1]);
                         i++;
                         if (currentPowerOfTwo < 0) {
                             currentPowerOfTwo = 7;
@@ -91,8 +91,8 @@ public class AIFFStegHide {
                   out.write(tmp);
                 }
               }
-            out.write(wav[wav.length - 2]);
-            out.write(wav[wav.length - 1]);
+            out.write(aiff[aiff.length - 2]);
+            out.write(aiff[aiff.length - 1]);
 
             System.out.println("file written now play it and see if you hear the difference");
             System.out.println("Number of bytes added for the file");

@@ -34,16 +34,16 @@ public class AIFFStegSolve {
       File file = new File(outputFile);
       FileOutputStream out = new FileOutputStream(file);
 
-      byte[] wav = converter(soundFile);
+      byte[] aiff = converter(soundFile);
 
       int currentPowerOfTwo = 7;
       int currentInt = 0;
       boolean continuing = true;
       int bitsFound = 0;
 
-      for (int i = 42; i < wav.length - 1; i++) {
-        int tmp = wav[i];
-        if ((wav[i + 1] & 3) == 3) {
+      for (int i = 42; i < aiff.length - 1; i++) {
+        int tmp = aiff[i];
+        if ((aiff[i + 1] & 3) == 3) {
           bitsFound ++;
           if ((tmp & 7) == 6) {
             currentInt = currentInt | 1;
