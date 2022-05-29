@@ -55,3 +55,5 @@ Alex Cho is now `owo`
 `owo` (18:50 May 27): Found issue in Steg Solve instead of Steg Hide, fixed OGG Steg Solve
 
 `:3` (21:10 May 27): Used square-root curving to make the SpectroStegHide look SO GOOOD!
+
+`owo` (19:31 May 28): Changed AIFF and WAV code to work without using the original file
