@@ -59,3 +59,5 @@ Alex Cho is now `owo`
 `owo` (21:31 May 28): Changed AIFF and WAV code to work without using the original file
 
 `owo` (21:43 May 28): Removed unnecessary files from AIFF and WAV steg
+
+`:3` (14:40 May 29): Okay, I think I fixed the OGGStegHide bug if the file contained the letters "OggS". Also made OGGLab to understand the format better, so it can now read exactly how much data is stored before the next header.
