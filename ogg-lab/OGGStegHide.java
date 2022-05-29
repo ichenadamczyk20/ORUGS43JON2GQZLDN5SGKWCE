@@ -75,6 +75,12 @@ public class OGGStegHide {
                             writing = false;
                             break;
                         }
+                        if (inp[cursor + j] == 83 && cursor + j >= 3) {
+                            if (inp[cursor + j - 1] == 103 && inp[cursor+j-2] == 103 && inp[cursor+j-3] == 79) {
+                                cursor += j - 100;
+                                break;
+                            }
+                        }
                         out.write(inp[cursor + j]);
                         numberOfBytes++;
                     }
