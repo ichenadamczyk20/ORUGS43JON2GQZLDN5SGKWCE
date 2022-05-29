@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class SoundStegSolve {
+public class WAVStegSolve {
   public static byte[] converter (String filename){
     try{
       File file = new File(filename);
@@ -25,37 +25,32 @@ public class SoundStegSolve {
 
   public static void main(String[] args){
     try{
-      System.out.println("Usage: java SoundStegSolve <original audio> <modified audio> <file to reveal>");
+      System.out.println("Usage: java WAVStegSolve <modified audio> <file to reveal>");
 
       String soundFile = args[0];
-      String soundFileNew = args[1];
-      String outputFile = args[2];
+      String outputFile = args[1];
 
 
       File file = new File(outputFile);
       FileOutputStream out = new FileOutputStream(file);
 
       byte[] wav = converter(soundFile);
-      byte[] wav2 = converter(soundFileNew);
 
-      // okay looking back things don't suck that much
-
-      int currentPowerOfTwo = 7; // goes from 7 to 0
+      int currentPowerOfTwo = 7;
       int currentInt = 0;
       boolean continuing = true;
       int bitsFound = 0;
 
-      for (int i = 44; i < wav.length; i++) {
-        int tmp1 = wav[i] + 128;
-        int tmp2 = wav2[i] + 128;
-        if (tmp1 != tmp2) {
+      for (int i = 44; i < wav.length - 1; i++) {
+        int tmp = wav[i];
+        if ((wav[i + 1] & 3) == 3) {
           bitsFound ++;
-          if ((tmp2 & 7) == 6) {
+          if ((tmp & 7) == 6) {
             currentInt = currentInt | 1;
           }
           currentPowerOfTwo = currentPowerOfTwo - 1;
           if (currentPowerOfTwo < 0) {
-            out.write(currentInt - 128);
+            out.write(currentInt);
             currentPowerOfTwo = 7;
             currentInt = 0;
           } else {

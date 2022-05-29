@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class SoundStegHide {
+public class WAVStegHide {
     public static byte[] converter (String filename){
         try{
             File file = new File(filename);
@@ -25,7 +25,7 @@ public class SoundStegHide {
 
     public static void main(String[] args){
         try{
-            System.out.println("Usage: java SoundStegHide <original audio> <output audio> <file to hide>");
+            System.out.println("Usage: java WAVStegHide <original audio> <output audio> <file to hide>");
 
             String soundFile = args[0];
             String outputSound = args[1];
@@ -46,21 +46,18 @@ public class SoundStegHide {
             }
             out.write(tmp2);
 
-            // okay this is where things really SUCK SUCK SUCK JUST KILL ME
-            // good luck alex
-
-            int currentPowerOfTwo = 7; // goes from 7 to 0
+            int currentPowerOfTwo = 7;
             int currentIndex = 0;
-            int currentInt = inp[currentIndex] + 128;
-            int rightMost = 0B10000000;
+            int currentInt = inp[currentIndex];
+            int leftMost = 0B10000000;
             boolean continuing = true;
             int numberOfBits = 0;
 
             for (int i = 44; i < wav.length - 1; i++) {
-                int tmp = wav[i] + 128;
+                int tmp = wav[i];
                 if ((tmp & 7) == 7) {
                     if (continuing) {
-                        int bit = currentInt & rightMost;
+                        int bit = currentInt & leftMost;
                         if (bit != 0) {
                             tmp = tmp - 1;
                         } else {
@@ -70,21 +67,23 @@ public class SoundStegHide {
                         if (currentPowerOfTwo < 0) {
                             currentPowerOfTwo = 7;
                             currentIndex += 1;
+                            wav[i+1] |= 3;
+                            i++;
                             if (currentIndex >= inp.length) {
                                 continuing = false;
                             } else {
-                                currentInt = inp[currentIndex] + 128;
+                                currentInt = inp[currentIndex];
                             }
                         } else {
                             currentInt = currentInt << 1;
                         }
                         numberOfBits++;
-                    } else {
-                        tmp = tmp | 2;
                     }
                 }
-
-                out.write(tmp - 128);
+                if (!continuing && (tmp & 3) == 3){
+                  tmp -= 1;
+                }
+                out.write(tmp);
             }
             out.write(wav[wav.length - 1]);
 
