@@ -49,7 +49,7 @@ public class AIFFStegHide {
             int currentPowerOfTwo = 7;
             int currentIndex = 0;
             int currentInt = inp[currentIndex];
-            int rightMost = 0B10000000;
+            int leftMost = 0B10000000;
             boolean continuing = true;
             int numberOfBits = 0;
 
@@ -57,7 +57,7 @@ public class AIFFStegHide {
                 int tmp = wav[i];
                 if ((tmp & 7) == 7) {
                     if (continuing) {
-                        int bit = currentInt & rightMost;
+                        int bit = currentInt & leftMost;
                         if (bit != 0) {
                             tmp = tmp - 1;
                         } else {
@@ -76,8 +76,6 @@ public class AIFFStegHide {
                             currentInt = currentInt << 1;
                         }
                         numberOfBits++;
-                    } else {
-                        tmp = tmp | 2;
                     }
                 }
 
