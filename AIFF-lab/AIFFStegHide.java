@@ -67,6 +67,8 @@ public class AIFFStegHide {
                         if (currentPowerOfTwo < 0) {
                             currentPowerOfTwo = 7;
                             currentIndex += 1;
+                            wav[i+1] |= 3;
+                            i++;
                             if (currentIndex >= inp.length) {
                                 continuing = false;
                             } else {
@@ -78,7 +80,9 @@ public class AIFFStegHide {
                         numberOfBits++;
                     }
                 }
-
+                if (!continuing && (tmp & 3) == 3){
+                  tmp -= 1;
+                }
                 out.write(tmp);
             }
             out.write(wav[wav.length - 1]);
