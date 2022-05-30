@@ -61,3 +61,5 @@ Alex Cho is now `owo`
 `owo` (21:43 May 28): Removed unnecessary files from AIFF and WAV steg
 
 `:3` (14:40 May 29): Okay, I think I fixed the OGGStegHide bug if the file contained the letters "OggS". Also made OGGLab to understand the format better, so it can now read exactly how much data is stored before the next header.
+
+`:3` (21:14 May 29): OGGStegSolve requires a single file. OGGStegHide will try to avoid the excess data left behind if OGGStegSolve was already run.
