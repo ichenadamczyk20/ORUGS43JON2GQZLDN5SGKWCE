@@ -55,6 +55,8 @@ The data is made of RIFF subchunks that follow the exact same format as above, b
 
 
 ### What is a .aiff file?
+![](present_img/aiff_chunk.png)
+
 ###### source: http://paulbourke.net/dataformats/audio/
 ###### source: http://midi.teragonaudio.com/tech/aiff.htm
 AIFF (Audio Interchange File Format) files are used to usually store uncompressed pulse-code modulation (PCM). Because of this, these files tend to take up much more space than mp3 files. AIFF Files are commonly found on Apple devices.
