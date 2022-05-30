@@ -33,6 +33,12 @@ tend to contain audio.
 - for editing audio, or ripping the audio from a video: audacity
 
 ### What is a .wav file?
+
+
+![](present_img/wav_diagram.png)
+
+![](present_img/wav_hex.png)
+
 A Waveform Audio File Format, a.k.a. WAV file, is a file format created by Microsoft and IBM to store audio bitstreams on PCs.
 
 WAV files make use of the Resource Interchange File Format, RIFF, bitstream for storing data in chunks.
