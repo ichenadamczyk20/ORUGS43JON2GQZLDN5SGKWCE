@@ -3,6 +3,7 @@ import java.util.*;
 
 public class OGGStegSolve {
   public static byte[] converter (String filename){
+    //converts input to bytes
     try{
       File file = new File(filename);
       byte[] data = new byte[(int)file.length()];
@@ -27,6 +28,7 @@ public class OGGStegSolve {
     try{
       System.out.println("Usage: java OGGStegSolve <modified audio file> <file to reveal>");
 
+      //take inputs
       String soundFile = args[0];
       String outputFile = args[1];
       File file = new File(outputFile);
@@ -34,6 +36,7 @@ public class OGGStegSolve {
 
       byte[] ogg = converter(soundFile);
 
+      //find the number of ogg chunks
       int count = 0;
       for (int i = 0; i < ogg.length - 3; i++) {
         if (ogg[i] == 79 && ogg[i + 1] == 103 && ogg[i + 2] == 103 && ogg[i + 3] == 83) count++;
@@ -58,7 +61,6 @@ public class OGGStegSolve {
         int dataLength = 0;
         for (int j = startIndex_firstHeader + 27; j < startIndex_firstHeader + 27 + numSegments; j++) {
           int segmentLength = ogg[j] & 0xFF;
-          //System.out.println(segmentLength);
           dataLength += segmentLength;
         }
 

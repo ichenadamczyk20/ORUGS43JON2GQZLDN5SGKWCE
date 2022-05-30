@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class OGGStegHide {
+    //converts input to bytes
     public static byte[] converter (String filename){
         try{
             File file = new File(filename);
@@ -27,8 +28,7 @@ public class OGGStegHide {
         try{
             System.out.println("Usage: java OGGStegHide <original audio> <output audio> <file to hide>");
 
-
-
+            //take inputs
             String soundFile = args[0];
             String outputSound = args[1];
             String inputFile = args[2];
@@ -39,10 +39,13 @@ public class OGGStegHide {
 
             byte[] inp = converter(inputFile);
 
+            //count the number of positions where ogg chunks start
             int count = 0;
             for (int i = 0; i < ogg.length - 3; i++)
                 if (ogg[i] == 79 && ogg[i + 1] == 103 && ogg[i + 2] == 103 && ogg[i + 3] == 83) count++;
 
+
+            //mark the positions where ogg chunks start
             int currentIndex = 0;
             int[] indices = new int[count];
             int[] endIndices = new int[count];
@@ -53,14 +56,13 @@ public class OGGStegHide {
                 }
             }
 
+            //calculate the total length of segments
             for (int i = 0; i < count; i++) {
                 int startIndex_firstHeader = indices[i];
-                //int startIndex_newHeader = indices[i + 1];
                 int numSegments = ogg[startIndex_firstHeader + 26] & 0xFF;
                 int dataLength = 0;
                 for (int j = startIndex_firstHeader + 27; j < startIndex_firstHeader + 27 + numSegments; j++) {
                     int segmentLength = ogg[j] & 0xFF;
-                    //System.out.println(segmentLength);
                     dataLength += segmentLength;
                 }
 

@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class WAVStegSolve {
+  //converts input to bytes
   public static byte[] converter (String filename){
     try{
       File file = new File(filename);
@@ -27,6 +28,7 @@ public class WAVStegSolve {
     try{
       System.out.println("Usage: java WAVStegSolve <modified audio> <file to reveal>");
 
+      //take inputs
       String soundFile = args[0];
       String outputFile = args[1];
 
@@ -41,6 +43,7 @@ public class WAVStegSolve {
       boolean continuing = true;
       int bitsFound = 0;
 
+      //start at 42 since the first 42 bytes will not contain messages, then check for bytes that end with 3 1s
       for (int i = 44; i < wav.length - 1; i++) {
         int tmp = wav[i];
         if ((wav[i + 1] & 3) == 3) {

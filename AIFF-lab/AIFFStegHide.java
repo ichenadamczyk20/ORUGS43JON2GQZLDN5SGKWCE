@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class AIFFStegHide {
+    //converts input to bytes
     public static byte[] converter (String filename){
         try{
             File file = new File(filename);
@@ -27,6 +28,7 @@ public class AIFFStegHide {
         try{
             System.out.println("Usage: java AIFFStegHide <original audio> <output audio> <file to hide>");
 
+            //take inputs
             String soundFile = args[0];
             String outputSound = args[1];
             String inputFile = args[2];
@@ -34,12 +36,12 @@ public class AIFFStegHide {
 
             File file = new File(outputSound);
             FileOutputStream out = new FileOutputStream(file);
-            // byte[] data = new byte[(int)file.length()];
-            // out.write(data);
+
 
             byte[] aiff = converter(soundFile);
             byte[] inp = converter(inputFile);
 
+            //copy the first 42 bytes (which should not be changed since changing them may corrupt the file)
             byte[] tmp2 = new byte[42];
             for(int i = 0; i < tmp2.length; i++){
                 tmp2[i] = aiff[i];
@@ -53,6 +55,7 @@ public class AIFFStegHide {
             boolean continuing = true;
             int numberOfBits = 0;
 
+            //edit the next bytes if the last 4 bits are 1 - then change every following bit to have the last 3 bits equal 1 to indicate hidden bits to steg solve
             for (int i = 42; i < aiff.length - 1; i++) {
                 int tmp = aiff[i];
                 if ((tmp & 7) == 7) {
@@ -85,12 +88,14 @@ public class AIFFStegHide {
                       out.write(tmp);
                     }
                 }else{
+                  //all other bytes ending with 3 1s will be altered so they don't send false signals to the solver
                   if((tmp & 3) == 3){
                     tmp -= 1;
                   }
                   out.write(tmp);
                 }
               }
+            //catch bytes at the end
             out.write(aiff[aiff.length - 2]);
             out.write(aiff[aiff.length - 1]);
 
