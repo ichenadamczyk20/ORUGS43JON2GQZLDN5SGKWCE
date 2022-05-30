@@ -47,7 +47,7 @@ A RIFF chunk looks like this:
 
 The data is made of RIFF subchunks that follow the exact same format as above, but without the "form type" field.
 
-### What is a .mp3 file?
+### What is a .mp3 file? (Disclaimer! We are not dealing with mp3 files in our steg program.)
 ###### source: http://blog.bjrn.se/2008/10/lets-build-mp3-decoder.html
 ###### source: http://www.mp3-tech.org/programmer/frame_header.html
 ###### source: http://www.datavoyage.com/mpgscript/mpeghdr.htm
