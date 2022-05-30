@@ -65,3 +65,5 @@ Alex Cho is now `owo`
 `:3` (21:14 May 29): OGGStegSolve requires a single file. OGGStegHide will try to avoid the excess data left behind if OGGStegSolve was already run.
 
 `:3` (23:30 May 29): Fixed some excess/dropped blocks in the OGGStegs. made half of the homework, uploaded to google drive
+
+`owo` (23:45 May 29): Attempted to create homework problems, noticed corrupted audio file as a result - attempting fixes
