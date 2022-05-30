@@ -104,3 +104,10 @@ AIFF (Audio Interchange File Format) files are used to usually store uncompresse
 AIFF Files require a common chunk, where information about the soundfile, is stored, along with a sound chunk, where the actual audio is stored. The common chunk functions as a header for the audio file and is 26 bytes long.
 
 Within the Sound Chunk is also another header that is 16 bytes long, storing the length of the soundfile and the likes. 
+
+
+### What is spectrogram steganography?
+Explain.
+
+
+also tidy up mp3, move aiff to wav, add helpful image diagrams
