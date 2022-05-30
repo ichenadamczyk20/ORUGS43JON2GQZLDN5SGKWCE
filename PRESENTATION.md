@@ -107,7 +107,10 @@ Within the Sound Chunk is also another header that is 16 bytes long, storing the
 
 
 ### What is spectrogram steganography?
-Explain.
+Spectrogram steganography is a method of hiding images in an audio file which can only be seen by comparing the frequency of the audio to the time. The images hidden within the audio files become visible when using software like audacity. An example of a spectrogram was shown above with the creeper, but here is an example of our own:
 
+![](present_img/cursed.png)
+
+By taking the greyscale of the original image and using it to change the frequency, we are able to draw out images on an audio file. 
 
 also tidy up mp3, move aiff to wav, add helpful image diagrams
