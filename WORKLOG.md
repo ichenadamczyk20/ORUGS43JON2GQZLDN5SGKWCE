@@ -69,3 +69,5 @@ Alex Cho is now `owo`
 `owo` (23:45 May 29): Attempted to create homework problems, noticed corrupted audio file as a result - attempting fixes
 
 `owo` (15:08 May 30): Added StartHere.wav, which can be stegged to lead to the rest of the hw
+
+`owo` (18:33 May 30): Added comments to steg files and fixed commit issue on local side
