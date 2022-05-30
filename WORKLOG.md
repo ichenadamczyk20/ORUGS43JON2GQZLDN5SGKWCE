@@ -71,3 +71,5 @@ Alex Cho is now `owo`
 `owo` (15:08 May 30): Added StartHere.wav, which can be stegged to lead to the rest of the hw
 
 `owo` (18:33 May 30): Added comments to steg files and fixed commit issue on local side
+
+`:3` (19:45 May 30): Corrected the homework for legibility. Edited down the slides a bit.
