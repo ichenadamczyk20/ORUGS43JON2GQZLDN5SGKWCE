@@ -63,3 +63,5 @@ Alex Cho is now `owo`
 `:3` (14:40 May 29): Okay, I think I fixed the OGGStegHide bug if the file contained the letters "OggS". Also made OGGLab to understand the format better, so it can now read exactly how much data is stored before the next header.
 
 `:3` (21:14 May 29): OGGStegSolve requires a single file. OGGStegHide will try to avoid the excess data left behind if OGGStegSolve was already run.
+
+`:3` (23:30 May 29): Fixed some excess/dropped blocks in the OGGStegs. made half of the homework, uploaded to google drive
