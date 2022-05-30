@@ -67,3 +67,5 @@ Alex Cho is now `owo`
 `:3` (23:30 May 29): Fixed some excess/dropped blocks in the OGGStegs. made half of the homework, uploaded to google drive
 
 `owo` (23:45 May 29): Attempted to create homework problems, noticed corrupted audio file as a result - attempting fixes
+
+`owo` (15:08 May 30): Added StartHere.wav, which can be stegged to lead to the rest of the hw
