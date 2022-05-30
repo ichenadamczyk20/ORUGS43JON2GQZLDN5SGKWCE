@@ -79,26 +79,23 @@ public class OGGStegHide {
                     out.write(ogg[wri]);
                 }
                 if (writing) {
-                    for (int j = 0; j < 100; j++) {
+                    for (int j = 0; j < 1000; j++) {
                         if (cursor + j >= inp.length) {
                             writing = false;
                             break;
                         }
                         if (inp[cursor + j] == 83 && cursor + j >= 3) {
                             if (inp[cursor + j - 1] == 103 && inp[cursor+j-2] == 103 && inp[cursor+j-3] == 79) {
-                                cursor += j - 100;
+                                cursor += j - 1000;
                                 break;
                             }
                         }
                         out.write(inp[cursor + j]);
                         numberOfBytes++;
                     }
-                    cursor += 100;
+                    cursor += 1000;
                 }
 
-            }
-            for (int i = 0; i < ogg.length; i++) {
-                out.write(ogg[i]);
             }
 
             System.out.println("file written now play it and see if you hear the difference");

@@ -51,7 +51,7 @@ public class OGGStegSolve {
 
       // name of the game: find the number of samples, find the sample size, predict the number of bytes
       // until the next header, then assume all of the excess is steganographized data
-      for (int i = 0; i < count - 1; i++) {
+      for (int i = 0; i < count; i++) {
         int startIndex_firstHeader = indices[i];
         int startIndex_newHeader = indices[i + 1];
         int numSegments = ogg[startIndex_firstHeader + 26] & 0xFF;
