@@ -73,3 +73,5 @@ Alex Cho is now `owo`
 `owo` (18:33 May 30): Added comments to steg files and fixed commit issue on local side
 
 `:3` (19:45 May 30): Corrected the homework for legibility. Edited down the slides a bit.
+
+`owo` (19:55 May 30): Added images and description of spectrogram steganography in the slides
