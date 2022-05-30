@@ -27,49 +27,58 @@ public class OGGStegHide {
         try{
             System.out.println("Usage: java OGGStegHide <original audio> <output audio> <file to hide>");
 
+
+
             String soundFile = args[0];
             String outputSound = args[1];
             String inputFile = args[2];
-
+            byte[] ogg = converter(soundFile);
 
             File file = new File(outputSound);
             FileOutputStream out = new FileOutputStream(file);
-            // byte[] data = new byte[(int)file.length()];
-            // out.write(data);
 
-            byte[] ogg = converter(soundFile);
             byte[] inp = converter(inputFile);
 
-            // byte[] tmp2 = new byte[44];
-            // for(int i = 0; i < tmp2.length; i++){
-            //     tmp2[i] = wav[i];
-            // }
-            // out.write(tmp2);
+            int count = 0;
+            for (int i = 0; i < ogg.length - 3; i++)
+                if (ogg[i] == 79 && ogg[i + 1] == 103 && ogg[i + 2] == 103 && ogg[i + 3] == 83) count++;
 
-            // okay this is where thing
-
-            int[] indices = new int[(int) (inp.length / 100) + 1];
             int currentIndex = 0;
-            for (int i = 1; i < ogg.length - 3; i++) {
-                if (ogg[i] == 79) {
-                    if (ogg[i + 1] == 103)
-                        if (ogg[i + 2] == 103)
-                            if (ogg[i + 3] == 83) {
-                                //System.out.println(i);
-                                if (currentIndex >= indices.length) break;
-                                indices[currentIndex] = i;
-                                currentIndex ++;
-                            }
+            int[] indices = new int[count];
+            int[] endIndices = new int[count];
+            for (int i = 0; i < ogg.length - 3; i++) {
+                if (ogg[i] == 79 && ogg[i + 1] == 103 && ogg[i + 2] == 103 && ogg[i + 3] == 83) {
+                    indices[currentIndex] = i;
+                    currentIndex++;
                 }
             }
 
+            for (int i = 0; i < count - 1; i++) {
+                int startIndex_firstHeader = indices[i];
+                int startIndex_newHeader = indices[i + 1];
+                int numSegments = ogg[startIndex_firstHeader + 26] & 0xFF;
+                int dataLength = 0;
+                for (int j = startIndex_firstHeader + 27; j < startIndex_firstHeader + 27 + numSegments; j++) {
+                    int segmentLength = ogg[j] & 0xFF;
+                    //System.out.println(segmentLength);
+                    dataLength += segmentLength;
+                }
+
+                int endIndex_data = startIndex_firstHeader + 26 + numSegments + dataLength;
+                endIndices[i] = endIndex_data;
+            }
+
             // now insert 100 bytes of data before each header
-            currentIndex = 0;
-            int cursor = 0;
             boolean writing = true;
+            int cursor = 0;
             int numberOfBytes = 0;
-            for (int i = 0; i < ogg.length; i++) {
-                if (currentIndex < indices.length && i == indices[currentIndex] && writing) {
+            for (int i = 0; i < indices.length; i++) {
+                int startIndex = indices[i];
+                int endIndex = endIndices[i];
+                for (int wri = startIndex; wri <= endIndex; wri++) {
+                    out.write(ogg[wri]);
+                }
+                if (writing) {
                     for (int j = 0; j < 100; j++) {
                         if (cursor + j >= inp.length) {
                             writing = false;
@@ -85,8 +94,10 @@ public class OGGStegHide {
                         numberOfBytes++;
                     }
                     cursor += 100;
-                    currentIndex++;
                 }
+
+            }
+            for (int i = 0; i < ogg.length; i++) {
                 out.write(ogg[i]);
             }
 
@@ -95,6 +106,7 @@ public class OGGStegHide {
             System.out.println(numberOfBytes);
             System.out.println("Size of file");
             System.out.println(inp.length);
+            if (writing) System.out.println("Warning: hidden file too large to fit, good luck decoding it");
 
             out.close();
         }catch(FileNotFoundException e){
