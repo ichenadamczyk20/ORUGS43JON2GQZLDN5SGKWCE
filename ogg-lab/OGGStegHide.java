@@ -53,9 +53,9 @@ public class OGGStegHide {
                 }
             }
 
-            for (int i = 0; i < count - 1; i++) {
+            for (int i = 0; i < count; i++) {
                 int startIndex_firstHeader = indices[i];
-                int startIndex_newHeader = indices[i + 1];
+                //int startIndex_newHeader = indices[i + 1];
                 int numSegments = ogg[startIndex_firstHeader + 26] & 0xFF;
                 int dataLength = 0;
                 for (int j = startIndex_firstHeader + 27; j < startIndex_firstHeader + 27 + numSegments; j++) {

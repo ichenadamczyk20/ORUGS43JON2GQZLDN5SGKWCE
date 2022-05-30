@@ -24,7 +24,7 @@ public class OGGLab {
     }
 
     public static void main(String[] args){
-        System.out.println("Usage: java OGGLab <normal ogg file>");
+        System.out.println("Usage: java OGGStegHide <normal ogg file>");
 
         String soundFile = args[0];
 
