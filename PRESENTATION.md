@@ -1,5 +1,5 @@
 # Audio Steganography!
-### Alex Cho, Ian Chen
+### Alex Cho, Ian Chen-Adamczyk
 
 ## What is Audio Steganography?
 
@@ -47,6 +47,18 @@ A RIFF chunk looks like this:
 
 The data is made of RIFF subchunks that follow the exact same format as above, but without the "form type" field.
 
+
+### What is a .aiff file?
+###### source: http://paulbourke.net/dataformats/audio/
+###### source: http://midi.teragonaudio.com/tech/aiff.htm
+AIFF (Audio Interchange File Format) files are used to usually store uncompressed pulse-code modulation (PCM). Because of this, these files tend to take up much more space than mp3 files. AIFF Files are commonly found on Apple devices.
+
+AIFF Files require a common chunk, where information about the soundfile, is stored, along with a sound chunk, where the actual audio is stored. The common chunk functions as a header for the audio file and is 26 bytes long.
+
+Within the Sound Chunk is also another header that is 16 bytes long, storing the length of the soundfile and the likes. 
+
+
+
 ### What is a .mp3 file? (Disclaimer! We are not dealing with mp3 files in our steg program.)
 ###### source: http://blog.bjrn.se/2008/10/lets-build-mp3-decoder.html
 ###### source: http://www.mp3-tech.org/programmer/frame_header.html
@@ -89,25 +101,20 @@ What is Huffman coding: The idea is that if you know that A will appear more fre
 OGG files are files that can compress as well as, if not better than MP3, and the best part is that the specifications are open-source. So what's in a .ogg file?
 
 .ogg files are split into data packets. Each data packet has the following:
- - A 27 byte header
+ - A header with (27 + number of segments) bytes
  - - A tag of 4 bytes: `OggS` (or hex `4F 67 67 53`)
  - - 21 bytes of version, header type, granule position, bitstream serial number, page sequence number, checksum.
- - - 1 byte to indicate the number of segments in the packet, and 1 byte to indicate the size of each segment in bytes.
+ - - A byte to indicate the size of each segment in the packet.
 
 It's pretty complicated. Just use `libogg` and `libvorbis`, they're open source after all.
 
-### What is a .aiff file?
-###### source: http://paulbourke.net/dataformats/audio/
-###### source: http://midi.teragonaudio.com/tech/aiff.htm
-AIFF (Audio Interchange File Format) files are used to usually store uncompressed pulse-code modulation (PCM). Because of this, these files tend to take up much more space than mp3 files. AIFF Files are commonly found on Apple devices.
-
-AIFF Files require a common chunk, where information about the soundfile, is stored, along with a sound chunk, where the actual audio is stored. The common chunk functions as a header for the audio file and is 26 bytes long.
-
-Within the Sound Chunk is also another header that is 16 bytes long, storing the length of the soundfile and the likes. 
-
+Our steganography inserts redundant data between each of the ogg data chunks.
 
 ### What is spectrogram steganography?
-Explain.
+Spectrogram steganography is a method of hiding images in an audio file which can only be seen by comparing the frequency of the audio to the time. The images hidden within the audio files become visible when using software like audacity. An example of a spectrogram was shown above with the creeper, but here is an example of our own:
 
+![](present_img/cursed.png)
 
-also tidy up mp3, move aiff to wav, add helpful image diagrams
+By taking the greyscale of the original image and using it to change the frequency, we are able to draw out images on an audio file. 
+
+Our program splits each x-column of the image and assigns it a time segment. For each time segment, it loops through each pixel in that column and calculates a list of amplitudes (based on the color) and frequencies (based on the position in the image). It then calculates a sum of sin functions over the times in the .wav file.
