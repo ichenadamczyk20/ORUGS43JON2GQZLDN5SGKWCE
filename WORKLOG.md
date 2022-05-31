@@ -75,3 +75,5 @@ Alex Cho is now `owo`
 `:3` (19:45 May 30): Corrected the homework for legibility. Edited down the slides a bit.
 
 `owo` (19:55 May 30): Added images and description of spectrogram steganography in the slides
+
+`:3` (14:51 May 31): Last minute addition of images for the presentation and clarifications in the hw
