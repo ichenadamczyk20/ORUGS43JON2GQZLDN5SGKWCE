@@ -20,12 +20,12 @@ For a more legal example, Amazon modified its Super Bowl commercial for Alexa to
 ## What Files Store Audio?
 
 Files that are:
-  - Under file types: WAV, mp3, aiff, ogg, webm, m4a, flac, etc.
-  - Usually at least 1KB, but under 10 MB
+  - Under file types: WAV, mp3, aiff, ogg, webm, m4a, flac, aac, etc.
+  - Usually at least 100KB, but under 10 MB when compressed.
 tend to contain audio.
 
 ### Useful codec software
-- for interfacing with mp4 (the hardest): ffmpeg, LAME
+- for interfacing with mp3, m4a, mp4, aac, etc. (the hardest): ffmpeg, LAME
 - for converting between files: you can use vlc as a command line tool
  `vlc -I dummy "example.wav" --sout=#transcode{acodec=mp3,vcodec=dummy}:standard{access=file,mux=raw,dst="example.mp3"}`
 - for playing audio files in the terminal: aplay, mpg123, or ffplay
@@ -71,6 +71,9 @@ Within the Sound Chunk is also another header that is 16 bytes long, storing the
 ###### source: http://blog.bjrn.se/2008/10/lets-build-mp3-decoder.html
 ###### source: http://www.mp3-tech.org/programmer/frame_header.html
 ###### source: http://www.datavoyage.com/mpgscript/mpeghdr.htm
+
+![](present_img/MP3.gif)
+
 Compressed audio using the following facts about audio:
  - Humans can only hear from between 20 kHz and 20 Hz, and depending on the frequency, the sound might have to be very loud even for the person to perceive it.
  - The loudest frequencies ("signals") will drown out quieter ones.
@@ -86,6 +89,9 @@ MP3 files work as follows: (If you don't want to deal with all of this, then pro
  - - The data uses huffman coding (which allows it to be stored in about 1/8 the size). Each atom encoded here represents a number from -8206 to 8206, which can be looked up in a 70 kb Huffman table. The number must be raised to the `4/3` power and multiplied by the desired volume factor. 
  - - - Sometimes the data gets re-ordered for efficiency, so you have to put it back in order.
  - - - This next part is beyond the scope of steganography, but the output is filtered through band passes and transformed by the MDCT (modified discrete cosinte transform).
+
+![](present_img/id3v1.svg)
+
  - At the end, you get your Audio Tag ID3v1
  - - `3 bytes`: "TAG"
  - - `30 bytes`: Title
@@ -94,6 +100,8 @@ MP3 files work as follows: (If you don't want to deal with all of this, then pro
  - - `4 bytes`: Year
  - - `30 bytes`: Comment
  - - `1 byte`: Genre (ranging from `Blues` to `Dance Hall`)
+
+![](present_img/huffman.png)
 
 What is Huffman coding: The idea is that if you know that A will appear more frequently than B than C than D, you can use the following encoding:
  - `A = 0`
@@ -106,6 +114,9 @@ What is Huffman coding: The idea is that if you know that A will appear more fre
 ###### source: https://www.file-recovery.com/ogg-signature-format.htm
 ###### source: https://fileformats.fandom.com/wiki/Ogg
 ###### source: https://xiph.org/vorbis/doc/Vorbis_I_spec.html
+
+![](present_img/ogg.png)
+
 OGG files are files that can compress as well as, if not better than MP3, and the best part is that the specifications are open-source. So what's in a .ogg file?
 
 .ogg files are split into data packets. Each data packet has the following:
