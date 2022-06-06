@@ -3,7 +3,7 @@
 
 ## What is Audio Steganography?
 
-Audio Steganography acts in a similar fashion to image steganography - storing data through slightly modifying an audio file to hide data in a way that is undetectable by the human ear. This could be done in a multitude of different types of files, from hiding data in the header of a WAV file to creating spectrograms that become visible through applications such as Audacity.
+Audio Steganography acts in a similar fashion to image steganography - storing data through slightly modifying an audio file to hide data in a way that is undetectable by the human ear. This could be done in a multitude of different types of files, from hiding data between headers of an OGG file to creating spectrograms that become visible through applications such as Audacity.
 
 #### Example:
 
@@ -20,20 +20,28 @@ For a more legal example, Amazon modified its Super Bowl commercial for Alexa to
 ## What Files Store Audio?
 
 Files that are:
-  - Under file types: WAV, mp3, aiff, ogg, webm, m4a, flac, aac, etc.
-  - Usually at least 100KB, but under 10 MB when compressed.
+  - Under file types: wav, mp3, aiff, ogg, webm, m4a, flac, aac, etc.
+  - Usually at least 100KB and under 25 MB.
 tend to contain audio.
 
 ### Useful codec software
-- for interfacing with mp3, m4a, mp4, aac, etc. (the hardest): ffmpeg, LAME
+- for interfacing with mp3, m4a, wma, etc. (the hardest): ffmpeg
+- for interfacing just with mp3 while staying open-source: LAME
 - for converting between files: you can use vlc as a command line tool
+
  `vlc -I dummy "example.wav" --sout=#transcode{acodec=mp3,vcodec=dummy}:standard{access=file,mux=raw,dst="example.mp3"}`
+- to convert an ogg file into wav: oggdec
 - for playing audio files in the terminal: aplay, mpg123, or ffplay
 - for downloading from youtube: youtube-dl
 - for editing audio, or ripping the audio from a video: audacity
 
-### What is a .wav file?
 
+### Some important metadata for audio files
+- sampling rate (usually ranges from 8000 Hz to 96000 Hz, with the most common being 44100 or 48000 Hz)
+- channels (mono, stereo, quadraphonic, surround sound, etc.)
+- bit depth (the number of bits for a sample, 8-bit to 32-bit but usually 16-bit)
+
+### What is a .wav file?
 
 ![](present_img/wav_diagram.png)
 
@@ -43,28 +51,30 @@ A Waveform Audio File Format, a.k.a. WAV file, is a file format created by Micro
 
 WAV files make use of the Resource Interchange File Format, RIFF, bitstream for storing data in chunks.
 
+WAV files use lossless compression: WAV files store pulse-code modulation (PCM) (i.e. the value of the waveform at each sample)
+
 ### What is a RIFF file?
 ###### source: https://johnloomis.org/cpe102/asgn/asgn1/riff.html
 A RIFF chunk looks like this:
- - Chunk identifier: 64 bits, 8 bytes
- - Size of the data: 64 bits, 8 bytes, 'tis the number of bytes in the data
+ - Chunk identifier: 32 bits, 4 bytes
+ - Size of the data: 32 bits, 4 bytes, number of bytes in the data
  - Form type: 4 bytes, 4 letters (can be CPPO, PAL, RDIB, RMID, RMMP, WAVE)
  - The actual data
 
 The data is made of RIFF subchunks that follow the exact same format as above, but without the "form type" field.
 
+WAV files are just a single chunk with a single header (longer than the RIFF header) at the beginning.
 
 ### What is a .aiff file?
 ![](present_img/aiff_chunk.png)
 
 ###### source: http://paulbourke.net/dataformats/audio/
 ###### source: http://midi.teragonaudio.com/tech/aiff.htm
-AIFF (Audio Interchange File Format) files are used to usually store uncompressed pulse-code modulation (PCM). Because of this, these files tend to take up much more space than mp3 files. AIFF Files are commonly found on Apple devices.
+AIFF (Audio Interchange File Format) files also usually store uncompressed PCM. Because of this, these files tend to take up much more space than mp3 or ogg files. AIFF Files are commonly found on Apple devices.
 
 AIFF Files require a common chunk, where information about the soundfile, is stored, along with a sound chunk, where the actual audio is stored. The common chunk functions as a header for the audio file and is 26 bytes long.
 
 Within the Sound Chunk is also another header that is 16 bytes long, storing the length of the soundfile and the likes. 
-
 
 
 ### What is a .mp3 file? (Disclaimer! We are not dealing with mp3 files in our steg program.)
@@ -74,21 +84,22 @@ Within the Sound Chunk is also another header that is 16 bytes long, storing the
 
 ![](present_img/MP3.gif)
 
+Moving Picture Experts Group (MPEG) made the media formats MPEG-1, MPEG-2, and MPEG-4. Later standards allow more range for  quality and features such as digital rights management. MP3 stands for MPEG-1 Audio Layer 3.
+
 Compressed audio using the following facts about audio:
- - Humans can only hear from between 20 kHz and 20 Hz, and depending on the frequency, the sound might have to be very loud even for the person to perceive it.
+ - Humans can only hear from between 20 kHz and 20 Hz, and depending on the frequency, the sound might have to be very loud  for the person to even perceive it.
  - The loudest frequencies ("signals") will drown out quieter ones.
  - Various psychoacoustic models that may be used when *encoding* an mp3 file (but you don't need to know these to decode an mp3 file)
+ - - Ex: Bark scale (named for Heinrich Barkhausen) which models how frequencies are perceived logarithmically.
 
-MP3 files work as follows: (If you don't want to deal with all of this, then probably use FFMpeg or LAME for your program.)
+MP3 files work as follows: (If you don't want to deal with all of this, FFMpeg or LAME are always fine for your program.)
  - Fun fact: the ISO specifications for MP3 are proprietary. To view them, you'd have to pay at least 203.09 dollars.
- - There is no header. The MP3 file is built by concatenating frames.
+ - The MP3 file is built by concatenating frames, each with their own headers.
  - They are split into data chunks:
- - - Each chunk has a header, an optional checksum, and the data (which contains exactly 576 samples)
- - - - Headers begin with a hex that looks like: `FFFB7864` (4 bytes, 32 bits)
- - - - - The exact bits are: `11111111111 (2 bits, specify mpeg version) (2 bits, specify layer description) (1 bit, protected by CRC?) (4 bits, the bit rate index, must specify a multiple of 32kbps) (2 bits, sampling rate frequency) (1 bit, are frames padded with a single bit to exactly fit the bit rate?) (1 bit, private bit) (2 bits, channel mode) (2 bits, mode extension) (1 bit, copyrighted?) (1 bit, original media?) (2 bits, emphasis setting)`
- - - The data uses huffman coding (which allows it to be stored in about 1/8 the size). Each atom encoded here represents a number from -8206 to 8206, which can be looked up in a 70 kb Huffman table. The number must be raised to the `4/3` power and multiplied by the desired volume factor. 
- - - - Sometimes the data gets re-ordered for efficiency, so you have to put it back in order.
- - - - This next part is beyond the scope of steganography, but the output is filtered through band passes and transformed by the MDCT (modified discrete cosinte transform).
+ - - Each chunk has a 4-byte header (always start with `FF`), an optional checksum, and the data (which contains exactly 576 samples).
+ - - The data uses huffman coding (which allows it to have ~87% space saving). Each atom encoded here represents a number from -8206 to 8206, which can be looked up in a 70 kB Huffman table. The number is also raised to the `4/3` power and multiplied by the desired volume factor (because of logarithmic frequency bands).
+ - - - Sometimes the data gets re-ordered inside the chunk for efficiency, so you have to put it back in order.
+ - - - The output is filtered through band passes and transformed by the MDCT (modified discrete cosine transform).
 
 ![](present_img/id3v1.svg)
 
@@ -125,14 +136,20 @@ OGG files are files that can compress as well as, if not better than MP3, and th
  - - 21 bytes of version, header type, granule position, bitstream serial number, page sequence number, checksum.
  - - A byte to indicate the size of each segment in the packet.
 
-It's pretty complicated. Just use `libogg` and `libvorbis`, they're open source after all.
+The rest of the data is encoded in ways similar to mp3. (If you don't want to write your own implementations, probably look into `libogg` or `libvorbis`.) They also use MDCT and Huffman coding, but they also involve residue vectors and have more information stored in the headers.
 
-Our steganography inserts redundant data between each of the ogg data chunks.
+We couldn't figure out these specifications, but the most relevant piece of information is that OGG files are designed to prevent corruption by allowing the decoder skip to the next header of `OggS` if the chunk it's on is unreadable.
+
+Our steganography inserts data between each of the ogg data chunks, so it's not read by OGG decoders.
 
 ### What is spectrogram steganography?
 Spectrogram steganography is a method of hiding images in an audio file which can only be seen by comparing the frequency of the audio to the time. The images hidden within the audio files become visible when using software like audacity. An example of a spectrogram was shown above with the creeper, but here is an example of our own:
 
 ![](present_img/cursed.png)
+
+ - x-axis: time
+ - y-axis: frequency
+ - color: amplitude of that frequency (when audio is decomposed into its constituent frequencies)
 
 By taking the greyscale of the original image and using it to change the frequency, we are able to draw out images on an audio file. 
 
