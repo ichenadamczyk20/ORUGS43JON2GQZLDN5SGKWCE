@@ -1,4 +1,4 @@
-## Project Description:
+## Project Description: 
 
 In this project, we'll show off audio steganography! We'll show some examples of it along with uses in the past, how to make use of it to hide data, etc.
 
