@@ -1,14 +1,16 @@
-Hi this is our awesome README file
-We'll fill this out over time.
+## Project Description:
 
-Project Description:
 In this project, we'll show off audio steganography! We'll show some examples of it along with uses in the past, how to make use of it to hide data, etc.
 
-Directions:
+## MD File Locations:
 
-
-MD file locations:
 this is just in the repo lmao
+
+https://github.com/ichenadamczyk20/ORUGS43JON2GQZLDN5SGKWCE/blob/main/HOMEWORK.md
+
+https://github.com/ichenadamczyk20/ORUGS43JON2GQZLDN5SGKWCE/blob/main/PRESENTATION.md
+
+## Directions:
 
 Here are some commands:
 ```
