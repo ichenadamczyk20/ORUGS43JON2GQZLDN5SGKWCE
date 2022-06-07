@@ -1,6 +1,6 @@
 Hello, Audio Steganography group here. We are very sorry for the HW being so long and confusing, so now we would like to explain the solution to it.
 
-Our presentation was kinda rushed and wasn't designed with the required concepts for the HW in mind. As such, here are the things we should have mentioned/emphasized in our presentation:
+Our presentation wasn't designed with the required knowledge for the HW in mind. As such, here are the things we should have mentioned/emphasized in our presentation:
 
 - Every important audio and image file format uses the header-data format for chunks that usually says what format the file is in plain-text. If you want to know what type of file something is, you can find out using `head`.
 - Spectrogram audio does not sound normal. Instead, it usually has a lot of clicks and a lot of dissonant tones moving around.
@@ -16,7 +16,7 @@ Our presentation was kinda rushed and wasn't designed with the required concepts
 - - `OGGLab` was a test java program that would try to parse each ogg header (except the last) and determine how long the data part is and where the next chunk starts.
 - - `SpectroStegHide` can render an image file as a 10-second spectrogram in a new wav file.
 
-With that information, here's a quick outline of the steps to complete the homework. (Pls don't read unless you are absolutely certainly giving up)
+With that information, here's a quick outline of the steps to complete the homework.
 
 ### The solution
 
