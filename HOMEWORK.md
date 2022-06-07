@@ -10,6 +10,6 @@ Please hand in a text description of the final image encoded by spectrogram.
 
 ### Edit
 
-Okay so homework was hard. So here's a write-up. The first half is just helpful hints, the second half is the actual write-up. Hope this helps
+Okay homework was hard. So here's a write-up. The first half is helpful hints and important knowledge, the second half is the actual write-up. Hope this helps
 
 https://github.com/ichenadamczyk20/ORUGS43JON2GQZLDN5SGKWCE/blob/main/WRITE-UP.md
