@@ -7,3 +7,9 @@ YO MAKE SURE TO NOT DEAFEN YOURSELF IAN TELLS ME THESE AUDIO FILES CAN DO THAT S
 (when you do the audacity spectrogram, pls open the settings and make sure it is set to linear, 1 to 8000 Hz for best results)
 
 Please hand in a text description of the final image encoded by spectrogram.
+
+### Edit
+
+Okay so homework was hard. So here's a write-up. The first half is just helpful hints, the second half is the actual write-up. Hope this helps
+
+https://github.com/ichenadamczyk20/ORUGS43JON2GQZLDN5SGKWCE/blob/main/WRITE-UP.md
