@@ -28,7 +28,7 @@ javac *.java
 java OGGLab <normal ogg file>
 java OGGStegHide <original audio> <output audio> <file to hide>
 java OGGStegSolve <modified audio file> <file to reveal>
-cd ../spectro-lab/
+cd ../spectrogram-lab/
 javac *.java
 java SpectroStegHide <file to hide> <output audio>
 ```
