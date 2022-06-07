@@ -38,7 +38,7 @@ Now you have a plain-text link to a google drive folder. There, you see a folder
 
 Remember that `OggS` marks the start of every chunk? To find the ogg file with 530 chunks, you just need to find the ogg file with exactly 530 occurences of `OggS`.
 
-- The house-recommended command is `grep "OggS" --text -c *`
+- Our recommended command is `grep "OggS" --text -c *`
 
 You now see that `snowmountain.ogg` has 530 chunks. Listening to it doesn't help you continue, so...
 
